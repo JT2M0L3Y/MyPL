@@ -1,0 +1,114 @@
+# ------------------------------------------------
+# FILE: prog1.mypl
+# DATE: 4/17/2023
+# AUTH: Jonathan Smoley
+# DESC: MyPl program to bubble sort a linked list
+# ------------------------------------------------
+
+struct Node {
+  int data,
+  Node next
+}
+
+struct LinkedList {
+  Node head
+}
+
+LinkedList swapNodes(LinkedList h, int x, int y) {
+  if (x == y) {
+    return h
+  }
+
+  Node prev_x = new Node
+  Node curr_x = h.head
+
+  while ((curr_x != null) and (curr_x.data != x)) {
+    prev_x = curr_x
+    curr_x = curr_x.next
+  }
+
+  Node prev_y = new Node
+  Node curr_y = h.head
+
+  while ((curr_y != null) and (curr_y.data != y)) {
+    prev_y = curr_y
+    curr_y = curr_y.next
+  }
+
+  if ((curr_x == null) or (curr_y == null)) {
+    return h
+  }
+
+  if (prev_x != null) {
+    prev_x.next = curr_x
+  }
+  else {
+    h.head = curr_x
+  }
+
+  Node tmp = curr_x.next
+  curr_x.next = curr_y.next
+  curr_y.next = tmp
+}
+
+
+LinkedList bubbleSort(LinkedList h) {
+  int count = 0
+
+  while (h.head != null) {
+    count = count + 1
+    h.head = h.head.next
+  }
+
+  for (int i = 0; i < count; i = i + 1) {
+    while (h.head != null) {
+      Node ptr = h.head.next
+      if (ptr != null) {
+        if (h.head.data > ptr.data) {
+          h = swapNodes(h, h.head.data, ptr.data)
+        }
+      }
+      h.head = h.head.next
+    }
+  }
+
+  return h
+}
+
+void printList(LinkedList h) {
+  Node tmp = h.head
+  while (tmp != null) {
+    print(concat(to_string(tmp.data), " -> "))
+    tmp = tmp.next
+  }
+  print("null\n")
+}
+
+void main() {
+  array int arr = new int[6]
+  arr[0] = 78
+  arr[1] = 20
+  arr[2] = 10
+  arr[3] = 32
+  arr[4] = 1
+  arr[5] = 5
+
+  LinkedList lst = new LinkedList
+  lst.head = new Node
+  lst.head.data = arr[0]
+  Node start = lst.head
+  for (int i = 1; i < length(arr); i = i + 1) {
+    Node tmp = new Node
+    tmp.data = arr[i]
+    start.next = tmp
+    start = start.next
+  }
+
+  print("Linked list before sorting\n")
+  printList(lst)
+
+  lst = bubbleSort(lst)
+
+  print("Linked list after sorting\n")
+  printList(lst)
+}

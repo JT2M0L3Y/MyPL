@@ -1,0 +1,9 @@
+void main() {
+  array int xs = new int[5]
+  int n = length(xs)
+  xs[0] = 32
+  print (xs[0])
+  print("\n")
+  print(length(xs))
+  print("\n")
+}
