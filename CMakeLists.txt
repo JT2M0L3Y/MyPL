@@ -15,10 +15,10 @@ find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
 
-add_executable(code_generator_tests tests/code_generator_tests.cpp
+add_executable(extension_tests tests/extension_tests.cpp
   src/token.cpp src/mypl_exception.cpp src/lexer.cpp src/ast_parser.cpp
   src/vm.cpp src/vm_instr.cpp src/var_table.cpp src/code_generator)
-target_link_libraries(code_generator_tests ${GTEST_LIBRARIES} pthread)
+target_link_libraries(extension_tests ${GTEST_LIBRARIES} pthread)
 
 # create mypl target
 add_executable(mypl src/token.cpp src/mypl_exception.cpp src/lexer.cpp
