@@ -106,9 +106,7 @@ void SemanticChecker::visit(FunDef &f)
   // check if return type is valid
   if (!(struct_defs.contains(f.return_type.type_name) || f.return_type.type_name == "void" || 
         BASE_TYPES.contains(f.return_type.type_name)))
-  {
     error("function return type cannot be '" + f.return_type.type_name + "'", f.fun_name);
-  }
 
   // add function return type to environment
   symbol_table.add("return", f.return_type);
@@ -321,13 +319,10 @@ void SemanticChecker::visit(CallExpr &e)
       // check if correct arg count
       if (e.args.size() != 1)
         error("print expects 1 argument", e.fun_name);
-
       e.args[0].accept(*this);
-
       // check if valid arg type is passed
       if (!BASE_TYPES.contains(curr_type.type_name) && !curr_type.is_array)
         error("cannot print non-primitive type", e.args[0].first->first_token());
-
       curr_type = DataType{false, "void"};
     }
     else if (fname == "input")
@@ -335,7 +330,6 @@ void SemanticChecker::visit(CallExpr &e)
       // check if correct arg count
       if (e.args.size() != 0)
         error("input does not expect arguments", e.fun_name);
-
       curr_type = DataType{false, "string"};
     }
     else if (fname == "to_string")
@@ -343,13 +337,10 @@ void SemanticChecker::visit(CallExpr &e)
       // check if correct arg count
       if (e.args.size() != 1)
         error("to_string expects 1 argument", e.fun_name);
-
       e.args[0].accept(*this);
-
       if (curr_type.type_name != "int" && curr_type.type_name != "double" && 
           curr_type.type_name != "char")
         error("to_string expects int/double/char type", e.args[0].first_token());
-
       curr_type = DataType{false, "string"};
     }
     else if (fname == "to_int")
@@ -357,12 +348,9 @@ void SemanticChecker::visit(CallExpr &e)
       // check if correct arg count
       if (e.args.size() != 1)
         error("to_int expects 1 argument", e.fun_name);
-
       e.args[0].accept(*this);
-
       if (curr_type.type_name == "int" || curr_type.type_name == "bool")
         error("to_int expects non-int types", e.args[0].first_token());
-
       curr_type = DataType{false, "int"};
     }
     else if (fname == "to_double")
@@ -370,12 +358,9 @@ void SemanticChecker::visit(CallExpr &e)
       // check if correct arg count
       if (e.args.size() != 1)
         error("to_double expects 1 argument", e.fun_name);
-
       e.args[0].accept(*this);
-
       if (curr_type.type_name != "string" && curr_type.type_name != "int")
         error("to_double expects string or int arg type", e.args[0].first_token());
-
       curr_type = DataType{false, "double"};
     }
     else if (fname == "length")
@@ -383,13 +368,11 @@ void SemanticChecker::visit(CallExpr &e)
       // check if correct arg count
       if (e.args.size() != 1)
         error("length expects 1 argument", e.fun_name);
-
       e.args[0].accept(*this);
-
       if (curr_type.type_name != "string" && !curr_type.is_array)
         error("length expects string or array", e.args[0].first_token());
-
-      if (curr_type.is_array) {
+      if (curr_type.is_array) 
+      {
         curr_type = DataType{true, "int"};
         e.fun_name = Token(e.fun_name.type(), "length@array", e.fun_name.line(), e.fun_name.column());
       }
@@ -401,17 +384,12 @@ void SemanticChecker::visit(CallExpr &e)
       // check if correct arg count
       if (e.args.size() != 2)
         error("get expects 2 argument", e.fun_name);
-
       e.args[0].accept(*this);
-
       if (curr_type.type_name != "int")
         error("get expects int", e.fun_name);
-
       e.args[1].accept(*this);
-
       if (curr_type.type_name != "string")
         error("get expects string", e.fun_name);
-
       curr_type = DataType{false, "char"};
     }
     else if (fname == "concat")
@@ -419,17 +397,12 @@ void SemanticChecker::visit(CallExpr &e)
       // check if correct arg count
       if (e.args.size() != 2)
         error("concat expects 2 argument", e.fun_name);
-
       e.args[0].accept(*this);
-
       if (curr_type.type_name != "string")
         error("concat expects string", e.fun_name);
-
       e.args[1].accept(*this);
-
       if (curr_type.type_name != "string")
         error("concat expects string", e.fun_name);
-
       curr_type = DataType{false, "string"};
     }
   }
@@ -438,24 +411,20 @@ void SemanticChecker::visit(CallExpr &e)
     // check user function exists
     if (!fun_defs.contains(fname))
       error("function '" + fname + "' was not defined", e.fun_name);
-
     // check correct arg count
     if (e.args.size() != fun_defs[fname].params.size())
       error("function '" + fname + "' expects " + to_string(fun_defs[fname].params.size()) + 
             " arguments", e.fun_name);
-
     // check arg types
     for (int i = 0; i < e.args.size(); i++)
     {
       e.args[i].accept(*this);
-
       // check if types match
       if (curr_type.type_name != fun_defs[fname].params[i].data_type.type_name && 
           curr_type.type_name != "void")
         error("function '" + fname + "' expects argument " + to_string(i + 1) + 
               " to be of type " + fun_defs[fname].params[i].data_type.type_name, e.fun_name);
     }
-
     // set return type
     curr_type = fun_defs[fname].return_type;
   }
@@ -465,11 +434,9 @@ void SemanticChecker::visit(Expr &e)
 {
   DataType first, rest;
   Token operation;
-
   // log first expr term type
   e.first->accept(*this);
   first = curr_type;
-
   // type check if op is not empty
   if (e.op.has_value())
   {
@@ -478,7 +445,6 @@ void SemanticChecker::visit(Expr &e)
     // get rest type
     e.rest->accept(*this);
     rest = curr_type;
-
     // check if valid and/or expression
     if ((operation.type() == TokenType::AND) || (operation.type() == TokenType::OR))
     {
@@ -487,7 +453,6 @@ void SemanticChecker::visit(Expr &e)
           (struct_defs.contains(first.type_name) && rest.type_name == "void"))
         error("using and/or ops on non-bool types '" + first.type_name 
               + "' and '" + rest.type_name + "'", e.first->first_token());
-
       curr_type = DataType{false, "bool"};
     }
     // check if valid arithmetic expression
@@ -499,7 +464,6 @@ void SemanticChecker::visit(Expr &e)
           !(first.type_name == "double" && rest.type_name == "double"))
         error("using arithmetic ops on non-int/double types '" + first.type_name + 
               "' and '" + rest.type_name + "'", e.first->first_token());
-
       curr_type = first;
     }
     // logical operators
@@ -519,8 +483,6 @@ void SemanticChecker::visit(Expr &e)
       else
       {
         // check if used with non-comparable type
-        // if (first.type_name != rest.type_name || first.type_name == "bool" || first.is_array || 
-        //     rest.is_array || rest.type_name == "bool")
         if (first.type_name != rest.type_name)
           error("using relational ops on non-comparable types '" + first.type_name +
                     "' and '" + rest.type_name + "'", e.first->first_token());
@@ -531,15 +493,10 @@ void SemanticChecker::visit(Expr &e)
   }
   // if lhs, but not rhs then type is lhs
   else if (e.first != nullptr && e.rest == nullptr)
-  {
     curr_type = first;
-  }
   // otherwise, type is void
   else
-  {
     curr_type = DataType{false, "void"};
-  }
-
   // check type in negation if present
   if (e.negated && curr_type.type_name != "bool")
     error("negating non-bool type '" + curr_type.type_name + "'", e.first->first_token());
@@ -562,7 +519,6 @@ void SemanticChecker::visit(NewRValue &v)
     // check if name is valid
     if (curr_type.type_name != "int")
       error("type '" + v.type.lexeme() + "' not defined", v.type);
-
     curr_type = DataType{true, v.type.lexeme()};
   }
   else
@@ -573,35 +529,28 @@ void SemanticChecker::visit(VarRValue &v)
 {
   if (!symbol_table.name_exists(v.path[0].var_name.lexeme()))
     error("variable '" + v.path[0].var_name.lexeme() + "' not defined", v.path[0].var_name);
-
   // check if defined
   if (v.path[0].array_expr.has_value()) {
     v.path[0].array_expr->accept(*this);
-
     if (curr_type.type_name != "int")
       error("type '" + v.path[0].var_name.lexeme() + "' not defined", v.path[0].var_name);
-
     curr_type = symbol_table.get(v.path[0].var_name.lexeme()).value();
   }
   else {
     // get type
     curr_type = *symbol_table.get(v.path[0].var_name.lexeme());
   }
-
   // complex paths
   if (v.path.size() > 1) {
     DataType var_type = symbol_table.get(v.path[0].var_name.lexeme()).value();
     StructDef def = struct_defs[var_type.type_name];
-
     for (int i = 1; i < v.path.size(); i++)
     {
       // check if struct
       if (!get_field(def, v.path[i].var_name.lexeme()))
         error("struct '" + v.path[0].var_name.lexeme() + "' does not have a field '" +
               v.path[i].var_name.lexeme() + "'", v.path[i].var_name);
-
       curr_type = get_field(def, v.path[i].var_name.lexeme())->data_type;
-
       def = struct_defs[curr_type.type_name];
     }
   }

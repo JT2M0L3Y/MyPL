@@ -57,7 +57,8 @@ void CodeGenerator::visit(FunDef& f)
   // add a return if last stmt was not a return
   int instr_count = curr_frame.instructions.size();
   if (f.stmts.size() == 0 || (f.return_type.type_name == "void" && 
-      curr_frame.instructions[instr_count - 1].opcode() != OpCode::RET)) {
+      curr_frame.instructions[instr_count - 1].opcode() != OpCode::RET)) 
+  {
     curr_frame.instructions.push_back(VMInstr::PUSH(nullptr));
     curr_frame.instructions.push_back(VMInstr::RET());
   }
@@ -127,7 +128,6 @@ void CodeGenerator::visit(ForStmt& s)
 void CodeGenerator::visit(IfStmt& s)
 {
   vector<int> jumps;
-
   // if part
   s.if_part.condition.accept(*this);
   var_table.push_environment();
@@ -142,7 +142,6 @@ void CodeGenerator::visit(IfStmt& s)
     jumps.push_back(curr_frame.instructions.size() - 1);
   }
   curr_frame.instructions[jmpf_index] = VMInstr::JMPF(curr_frame.instructions.size());
-
   // else if part
   if (!s.else_ifs.empty()) {
     vector<BasicIf> e = s.else_ifs;
@@ -160,7 +159,6 @@ void CodeGenerator::visit(IfStmt& s)
       curr_frame.instructions[jmpf_index] = VMInstr::JMPF(curr_frame.instructions.size());
     }
   }
-
   // else part
   if (!s.else_stmts.empty()) {
     var_table.push_environment();
@@ -332,9 +330,7 @@ void CodeGenerator::visit(SimpleRValue& v)
     curr_frame.instructions.push_back(VMInstr::PUSH(val));
   }
   else if (v.value.type() == TokenType::NULL_VAL)
-  {
     curr_frame.instructions.push_back(VMInstr::PUSH(nullptr));
-  }
   else if (v.value.type() == TokenType::BOOL_VAL)
   {
     if (v.value.lexeme() == "true")

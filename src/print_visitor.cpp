@@ -66,19 +66,13 @@ void PrintVisitor::visit(FunDef &f)
       out << "[] ";
     }
     else
-    {
       out << f.params[i].data_type.type_name << " ";
-    }
 
     // check for end of list
     if (i != f.params.size() - 1)
-    {
       out << f.params[i].var_name.lexeme() << ", ";
-    }
     else
-    {
       out << f.params[i].var_name.lexeme();
-    }
   }
   out << ") ";
 
@@ -114,18 +108,12 @@ void PrintVisitor::visit(StructDef &s)
       out << "[] ";
     }
     else
-    {
       out << s.fields[i].data_type.type_name << " ";
-    }
 
     if (i == s.fields.size() - 1)
-    {
       out << s.fields[i].var_name.lexeme() << "\n";
-    }
     else
-    {
       out << s.fields[i].var_name.lexeme() << ",\n";
-    }
   }
   out << "}\n";
 
@@ -250,33 +238,25 @@ void PrintVisitor::visit(VarDeclStmt &s)
     out << "[] ";
   }
   else
-  {
     out << s.var_def.data_type.type_name << " ";
-  }
   
   out << s.var_def.var_name.lexeme() << " = ";
-
   s.expr.accept(*this);
 }
 
 void PrintVisitor::visit(AssignStmt &s)
 {
   if (s.lvalue.size() == 1)
-  {
     out << s.lvalue.front().var_name.lexeme();
-  }
   else
   {
     for (int i = 0; i < s.lvalue.size(); i++)
     {
       out << s.lvalue[i].var_name.lexeme();
       if (i != s.lvalue.size() - 1)
-      {
         out << ".";
-      }
     }
   }
-
   out << " = ";
   s.expr.accept(*this);
 }
@@ -285,18 +265,14 @@ void PrintVisitor::visit(CallExpr &e)
 {
   out << e.fun_name.lexeme() << "(";
   if (e.args.size() == 1)
-  {
     e.args.front().accept(*this);
-  }
   else if (e.args.size() > 1)
   {
     for (int i = 0; i < e.args.size(); i++)
     {
       e.args[i].accept(*this);
       if (i != e.args.size() - 1)
-      {
         out << ", ";
-      }
     }
   }
   out << ")";
@@ -330,9 +306,7 @@ void PrintVisitor::visit(Expr &e)
       out << ")";
     }
     else
-    {
       e.first->accept(*this);
-    }
   }
 }
 
@@ -351,17 +325,11 @@ void PrintVisitor::visit(ComplexTerm &t)
 void PrintVisitor::visit(SimpleRValue &v)
 {
   if (v.value.type() == TokenType::STRING_VAL)
-  {
     out << "\"" << v.value.lexeme() << "\"";
-  }
   else if (v.value.type() == TokenType::CHAR_VAL)
-  {
     out << "'" << v.value.lexeme() << "'";
-  }
   else
-  {
     out << v.value.lexeme();
-  }
 }
 
 void PrintVisitor::visit(NewRValue &v)
@@ -372,21 +340,15 @@ void PrintVisitor::visit(NewRValue &v)
 void PrintVisitor::visit(VarRValue &v)
 {
   if (v.path.size() == 1)
-  {
     out << v.path.front().var_name.lexeme();
-  }
   else
   {
     for (int i = 0; i < v.path.size(); i++)
     {
       if (i == 0)
-      {
         out << v.path[i].var_name.lexeme();
-      }
       else
-      {
         out << "." << v.path[i].var_name.lexeme();
-      }
     }
   }
 }

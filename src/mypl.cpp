@@ -34,34 +34,22 @@ int main(int argc, char *argv[])
 
     // convert argv to string array
     for (int i = 0; i < argc; i++)
-    {
       args[i] = string(argv[i]);
-    }
 
     // check correct number of args
     if (argc > 1 && argc < 4)
     {
       // check flag mode
       if (args[1] == "--lex")
-      {
         lexMode = true;
-      }
       else if (args[1] == "--parse")
-      {
         parseMode = true;
-      }
       else if (args[1] == "--print")
-      {
         printMode = true;
-      }
       else if (args[1] == "--check")
-      {
         checkMode = true;
-      }
       else if (args[1] == "--ir")
-      {
         irMode = true;
-      }
     }
     else
     {
@@ -83,20 +71,14 @@ int main(int argc, char *argv[])
     if ((argc == 3))
     {
       input = new ifstream(args[2]);
-
       if (input->fail())
-      {
         throw MyPLException("unable to open file: " + args[2]);
-      }
     }
     else if (argc == 2 && !flag)
     {
       input = new ifstream(args[1]);
-
       if (input->fail())
-      {
         throw MyPLException("unable to open file: " + args[1]);
-      }
     }
 
     Lexer lexer(*input);
@@ -105,8 +87,6 @@ int main(int argc, char *argv[])
     if (lexMode)
     {
       Token t = lexer.next_token();
-
-      // lex tokens
       cout << to_string(t) << endl;
       while (t.type() != TokenType::EOS)
       {
@@ -117,8 +97,6 @@ int main(int argc, char *argv[])
     else if (parseMode)
     {
       SimpleParser parser(lexer);
-
-      // parse
       parser.parse();
     }
     else if (printMode)
@@ -126,8 +104,6 @@ int main(int argc, char *argv[])
       ASTParser parser(lexer);
       Program p = parser.parse();
       PrintVisitor printer(cout);
-
-      // check syntax
       p.accept(printer);
     }
     else if (checkMode)
@@ -135,8 +111,6 @@ int main(int argc, char *argv[])
       ASTParser parser(lexer);
       Program p = parser.parse();
       SemanticChecker checker;
-
-      // check semantics
       p.accept(checker);
     }
     else if (irMode)
@@ -164,9 +138,7 @@ int main(int argc, char *argv[])
 
     // free memory if necessary
     if ((argc == 3) || (argc == 2 && !flag))
-    {
       delete input;
-    }
   }
   catch (MyPLException &ex)
   {

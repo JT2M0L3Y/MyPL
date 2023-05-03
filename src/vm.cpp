@@ -62,14 +62,12 @@ void VM::run(bool DEBUG)
   call_stack.push(frame);
 
   // run loop (keep going until we run out of instructions)
-  while (!call_stack.empty() and frame->pc < frame->info.instructions.size()) {
-
+  while (!call_stack.empty() and frame->pc < frame->info.instructions.size()) 
+  {
     // get the next instruction
     VMInstr& instr = frame->info.instructions[frame->pc];
-
     // increment the program counter
     ++frame->pc;
-
     // for debugging
     if (DEBUG) {
       cerr << endl << endl;
@@ -92,19 +90,14 @@ void VM::run(bool DEBUG)
     // Literals and Variables
     //----------------------------------------------------------------------
 
-    if (instr.opcode() == OpCode::PUSH) {
+    if (instr.opcode() == OpCode::PUSH)
       frame->operand_stack.push(instr.operand().value());
-    }
-
-    else if (instr.opcode() == OpCode::POP) {
+    else if (instr.opcode() == OpCode::POP)
       frame->operand_stack.pop();
-    }
-
     else if (instr.opcode() == OpCode::LOAD) {
       // get v at memory address i, push v onto stack
       frame->operand_stack.push(frame->variables[get<int>(instr.operand().value())]);
     }
-
     else if (instr.opcode() == OpCode::STORE) {
       VMValue v = frame->operand_stack.top();
       if (!frame->variables.empty()) {
@@ -123,7 +116,6 @@ void VM::run(bool DEBUG)
     //----------------------------------------------------------------------
 
     // Arithmetic operators
-
     else if (instr.opcode() == OpCode::ADD) {
       VMValue x = frame->operand_stack.top();
       ensure_not_null(*frame, x);
@@ -133,7 +125,6 @@ void VM::run(bool DEBUG)
       frame->operand_stack.pop();
       frame->operand_stack.push(add(y, x));
     }
-
     else if (instr.opcode() == OpCode::SUB) {
       // pop x
       VMValue x = frame->operand_stack.top();
@@ -146,7 +137,6 @@ void VM::run(bool DEBUG)
       // push (y - x)
       frame->operand_stack.push(sub(y, x));
     }
-
     else if (instr.opcode() == OpCode::MUL) {
       // pop x
       VMValue x = frame->operand_stack.top();
@@ -159,7 +149,6 @@ void VM::run(bool DEBUG)
       // push (y * x)
       frame->operand_stack.push(mul(y, x));
     }
-
     else if (instr.opcode() == OpCode::DIV) {
       // pop x
       VMValue x = frame->operand_stack.top();
@@ -172,9 +161,7 @@ void VM::run(bool DEBUG)
       // push (y / x)
       frame->operand_stack.push(div(y, x));
     }
-
     // Logical operators
-
     else if (instr.opcode() == OpCode::AND) {
       // pop bool x
       VMValue x = frame->operand_stack.top();
@@ -187,7 +174,6 @@ void VM::run(bool DEBUG)
       // push (y and x)
       frame->operand_stack.push(get<bool>(y) and get<bool>(x));
     }
-
     else if (instr.opcode() == OpCode::OR) {
       // pop bool x
       VMValue x = frame->operand_stack.top();
@@ -200,7 +186,6 @@ void VM::run(bool DEBUG)
       // push (y or x)
       frame->operand_stack.push(get<bool>(y) or get<bool>(x));
     }
-
     else if (instr.opcode() == OpCode::NOT) {
       // pop bool x
       VMValue x = frame->operand_stack.top();
@@ -209,9 +194,7 @@ void VM::run(bool DEBUG)
       // push (not x)
       frame->operand_stack.push(not get<bool>(x));
     }
-
     // Relational (comparison) operators
-
     else if (instr.opcode() == OpCode::CMPLT) {
       // pop x
       VMValue x = frame->operand_stack.top();
@@ -224,7 +207,6 @@ void VM::run(bool DEBUG)
       // push (y < x)
       frame->operand_stack.push(lt(y, x));
     }
-
     else if (instr.opcode() == OpCode::CMPLE) {
       // pop x
       VMValue x = frame->operand_stack.top();
@@ -237,7 +219,6 @@ void VM::run(bool DEBUG)
       // push (y <= x)
       frame->operand_stack.push(le(y, x));
     }
-
     else if (instr.opcode() == OpCode::CMPGT) {
       // pop x
       VMValue x = frame->operand_stack.top();
@@ -250,7 +231,6 @@ void VM::run(bool DEBUG)
       // push (y > x)
       frame->operand_stack.push(gt(y, x));
     }
-
     else if (instr.opcode() == OpCode::CMPGE) {
       // pop x
       VMValue x = frame->operand_stack.top();
@@ -263,7 +243,6 @@ void VM::run(bool DEBUG)
       // push (y >= x)
       frame->operand_stack.push(ge(y, x));
     }
-
     else if (instr.opcode() == OpCode::CMPEQ) {
       // pop x
       VMValue x = frame->operand_stack.top();
@@ -274,7 +253,6 @@ void VM::run(bool DEBUG)
       // push (y == x)
       frame->operand_stack.push(eq(y, x));
     }
-
     else if (instr.opcode() == OpCode::CMPNE) {
       // pop x
       VMValue x = frame->operand_stack.top();
@@ -290,11 +268,8 @@ void VM::run(bool DEBUG)
     // Branching
     //----------------------------------------------------------------------
     
-    else if (instr.opcode() == OpCode::JMP) {
-      // jump to instruction i
+    else if (instr.opcode() == OpCode::JMP)
       frame->pc = get<int>(instr.operand().value());
-    }
-
     else if (instr.opcode() == OpCode::JMPF) {
       // pop x
       VMValue x = frame->operand_stack.top();
@@ -322,10 +297,8 @@ void VM::run(bool DEBUG)
         fun_frame->operand_stack.push(x);
         frame->operand_stack.pop();
       }
-
       frame = fun_frame;
     }
-
     else if (instr.opcode() == OpCode::RET) {
       // store return value, remove fxn
       VMValue ret = frame->operand_stack.top();
@@ -346,13 +319,11 @@ void VM::run(bool DEBUG)
       frame->operand_stack.pop();
       cout << to_string(x);
     }
-
     else if (instr.opcode() == OpCode::READ) {
       string val = "";
       getline(cin, val);
       frame->operand_stack.push(val);
     }
-    
     else if (instr.opcode() == OpCode::SLEN) {
       // pop string x
       VMValue x = frame->operand_stack.top();
@@ -362,7 +333,6 @@ void VM::run(bool DEBUG)
       int x_size = get<string>(x).size();
       frame->operand_stack.push(x_size);
     }
-
     else if (instr.opcode() == OpCode::ALEN) {
       // pop array x
       VMValue x = frame->operand_stack.top();
@@ -372,7 +342,6 @@ void VM::run(bool DEBUG)
       int x_size = array_heap[get<int>(x)].size();
       frame->operand_stack.push(x_size);
     }
-
     else if (instr.opcode() == OpCode::GETC) {
       // pop string x
       VMValue x = frame->operand_stack.top();
@@ -387,7 +356,6 @@ void VM::run(bool DEBUG)
       // push x[y]
       frame->operand_stack.push(string(1, get<string>(x)[get<int>(y)]));
     }
-
     else if (instr.opcode() == OpCode::TOINT) {
       // pop x
       VMValue x = frame->operand_stack.top();
@@ -410,7 +378,6 @@ void VM::run(bool DEBUG)
         frame->operand_stack.push(stoi(str));
       }
     }
-
     else if (instr.opcode() == OpCode::TODBL) {
       // pop x
       VMValue x = frame->operand_stack.top();
@@ -434,7 +401,6 @@ void VM::run(bool DEBUG)
         frame->operand_stack.push(stod(str));
       }
     }
-
     else if (instr.opcode() == OpCode::TOSTR) {
       // pop x
       VMValue x = frame->operand_stack.top();
@@ -443,7 +409,6 @@ void VM::run(bool DEBUG)
       // push x as string
       frame->operand_stack.push(to_string(x));
     }
-
     else if (instr.opcode() == OpCode::CONCAT) {
       // pop x
       VMValue x = frame->operand_stack.top();
@@ -468,7 +433,6 @@ void VM::run(bool DEBUG)
       frame->operand_stack.push(next_obj_id);
       ++next_obj_id;
     }
-
     else if (instr.opcode() == OpCode::ALLOCA) {
       // pop x and y
       VMValue x = frame->operand_stack.top();
@@ -482,7 +446,6 @@ void VM::run(bool DEBUG)
       frame->operand_stack.push(next_obj_id);
       ++next_obj_id;
     }
-
     else if (instr.opcode() == OpCode::ADDF) {
       // pop oid x
       VMValue x = frame->operand_stack.top();
@@ -491,7 +454,6 @@ void VM::run(bool DEBUG)
       // add field f to obj(x)
       struct_heap[get<int>(x)][get<string>(instr.operand().value())] = nullptr;
     }
-
     else if (instr.opcode() == OpCode::SETF) {
       // pop x and y
       VMValue x = frame->operand_stack.top();
@@ -502,7 +464,6 @@ void VM::run(bool DEBUG)
       // in heap set obj(y).f = x
       struct_heap[get<int>(y)][get<string>(instr.operand().value())] = x;
     }
-
     else if (instr.opcode() == OpCode::GETF) {
       // pop x
       VMValue x = frame->operand_stack.top();
@@ -511,7 +472,6 @@ void VM::run(bool DEBUG)
       // push obj(x).f onto operand stack
       frame->operand_stack.push(struct_heap[get<int>(x)][get<string>(instr.operand().value())]);
     }
-
     else if (instr.opcode() == OpCode::SETI) {
       // pop x, y, z
       VMValue x = frame->operand_stack.top();
@@ -528,7 +488,6 @@ void VM::run(bool DEBUG)
       // set array obj(z)[y] = x
       array_heap[get<int>(z)][get<int>(y)] = x;
     }
-
     else if (instr.opcode() == OpCode::GETI) {
       // pop x and y
       VMValue x = frame->operand_stack.top();
@@ -553,14 +512,11 @@ void VM::run(bool DEBUG)
       frame->operand_stack.push(x);
       frame->operand_stack.push(x);      
     }
-
     else if (instr.opcode() == OpCode::NOP) {
       // do nothing
     }
-    
-    else {
+    else
       error("unsupported operation " + to_string(instr));
-    }
   }
 }
 

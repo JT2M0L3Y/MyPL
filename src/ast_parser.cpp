@@ -158,9 +158,7 @@ void ASTParser::params(FunDef& f)
     {
       advance();
       if (match(TokenType::RPAREN))
-      {
         error("expecting another parameter");
-      }
     }
   }
 }
@@ -178,9 +176,7 @@ void ASTParser::data_type(VarDef& v)
     v.data_type.type_name = curr_token.lexeme();
     eat(curr_token.type(), "expecting base type");
     if (!match(TokenType::ID))
-    {
       error("expecting identifier after base type");
-    }
   }
   else if (match(TokenType::ID))
   {
@@ -252,7 +248,6 @@ void ASTParser::stmt(std::vector<std::shared_ptr<Stmt>>& s)
     {
       Token id_token = curr_token;
       advance();
-
       if (match({TokenType::ASSIGN, TokenType::DOT}))
       {
         AssignStmt aStmt;
@@ -292,9 +287,7 @@ void ASTParser::stmt(std::vector<std::shared_ptr<Stmt>>& s)
       }
     }
     else
-    {
       error("expecting statement");
-    }
   }
 }
 
@@ -496,7 +489,6 @@ void ASTParser::expr(Expr& e)
     ComplexTerm cTerm;
     expr(cTerm.expr);
     e.first = make_shared<ComplexTerm>(cTerm);
-
     eat(TokenType::RPAREN, "expecting ')'");
   }
   else if (base_rvalue() || match({TokenType::NULL_VAL,
@@ -507,9 +499,7 @@ void ASTParser::expr(Expr& e)
     e.first = make_shared<SimpleTerm>(sTerm);
   }
   else
-  {
     error("expecting expression start");
-  }
 
   if (bin_op())
   {
@@ -542,7 +532,6 @@ void ASTParser::rvalue(SimpleTerm& sTerm)
   {
     Token tmp = curr_token;
     advance();
-
     if (match(TokenType::LPAREN))
     {
       CallExpr cExpr;
@@ -561,9 +550,7 @@ void ASTParser::rvalue(SimpleTerm& sTerm)
     }
   }
   else
-  {
     error("expecting rvalue");
-  }
 }
 
 

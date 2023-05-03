@@ -54,7 +54,6 @@ Token Lexer::next_token()
     while (isspace(ch) || match(ch, '\n'))
     {
       ch = read();
-
       // check newline
       if (match(ch, '\n'))
       {
@@ -70,18 +69,13 @@ Token Lexer::next_token()
     while (match(ch, '#'))
     {
       while (!match(ch, '\n') && !match(ch, EOF))
-      {
         ch = read();
-      }
       // check end of file
       if (match(ch, EOF))
-      {
         return Token(TokenType::EOS, "end-of-stream", line, column);
-      }
       ch = read();
       column = 1;
       ++line;
-
       if (isspace(ch))
       {
         while (isspace(ch) || match(ch, '\n'))
@@ -100,9 +94,7 @@ Token Lexer::next_token()
 
   // check for EOF
   if (match(ch, EOF))
-  {
     return Token(TokenType::EOS, "end-of-stream", line, column);
-  }
 
   // check for single character tokens (arithmetic, punctuation, etc.)
   switch (ch)
@@ -143,24 +135,19 @@ Token Lexer::next_token()
     {
       read();
       return Token(TokenType::LESS_EQ, "<=", line, column - 1);
-      // return Token(TokenType::LESS_EQ, "<=", line, column - 2);
     }
-    // return Token(TokenType::LESS, "<", line, column - 1);
     return Token(TokenType::LESS, "<", line, column);
   case '>':
     if (match(peek(), '='))
     {
       read();
-      // return Token(TokenType::GREATER_EQ, ">=", line, column - 2);
       return Token(TokenType::GREATER_EQ, ">=", line, column - 1);
     }
-    // return Token(TokenType::GREATER, ">", line, column - 1);
     return Token(TokenType::GREATER, ">", line, column);
   case '!':
     if (match(peek(), '='))
     {
       read();
-      // return Token(TokenType::NOT_EQUAL, "!=", line, column - 2);
       return Token(TokenType::NOT_EQUAL, "!=", line, column - 1);
     }
     error("expecting '!=' found '" + string(1, ch) + string(1, peek()) + "'", line, column);
@@ -168,37 +155,27 @@ Token Lexer::next_token()
     if (match(peek(), '='))
     {
       read();
-      // return Token(TokenType::EQUAL, "==", line, column - 2);
       return Token(TokenType::EQUAL, "==", line, column - 1);
     }
-    // return Token(TokenType::ASSIGN, "=", line, column - 1);
     return Token(TokenType::ASSIGN, "=", line, column);
   }
 
   // check for character values (tricky cases too like '\n')
   if (match(ch, '\''))
   {
+    // empty character
     if (match(peek(), '\''))
-    {
-      // empty character
       error("empty character", line, column + 1);
-    }
     else
     {
       ch = read();
-
       if (match(peek(), '\''))
       {
         // check newline
         if (match(ch, '\n'))
-        {
           error("found end-of-line in character", line, column);
-        }
         else if (match(ch, '\t'))
-        {
           error("found tab in character", line, column);
-        }
-
         // normal character
         read();
         return Token(TokenType::CHAR_VAL, string(1, ch), line, column - 2);
@@ -207,7 +184,6 @@ Token Lexer::next_token()
       {
         // newlines, tabs, etc.
         ch = read();
-
         if (match(ch, 'n'))
         {
           if (match(peek(), '\''))
@@ -228,9 +204,7 @@ Token Lexer::next_token()
       else
       {
         if (match(ch, EOF))
-        {
           error("found end-of-file in character", line, column);
-        }
         else
         {
           ch = read();
@@ -245,22 +219,15 @@ Token Lexer::next_token()
   {
     ch = read();
     string result = "";
-
     while (!match(ch, '\"'))
     {
       if (match(ch, EOF))
-      {
         error("found end-of-file in string", line, column + result.length());
-      }
       if (match(ch, '\n'))
-      {
         error("found end-of-line in string", line, column);
-      }
-
       result += ch;
       ch = read();
     }
-
     int offset = result.length() + 1;
     return Token(TokenType::STRING_VAL, result, line, column - offset);
   }
@@ -270,7 +237,6 @@ Token Lexer::next_token()
   {
     string result = "";
     bool isDouble = false;
-
     while (peek() == '.' || isdigit(peek()))
     {
       if (peek() == '.')
@@ -282,21 +248,14 @@ Token Lexer::next_token()
           result += ch;
         }
         else
-        {
-          // already found a double
           break;
-        }
       }
       else
-      {
         result += ch;
-      }
       ch = read();
     }
-
     result += ch;
     int offset = result.length() - 1;
-
     if (isDouble)
     {
       if (!isdigit(ch))
@@ -309,134 +268,84 @@ Token Lexer::next_token()
     else
     {
       if (result[0] == '0' && result.length() > 1)
-      {
         error("leading zero in number", line, column - offset);
-      }
       return Token(TokenType::INT_VAL, result, line, column - offset);
     }
   }
-
+  
   // check for reserved words
   string result = "";
-
   while (isalpha(peek()))
   {
     result += ch;
     ch = read();
   }
   if (!isalpha(ch))
-  {
     error("unexpected character '" + string(1, ch) + "'", line, column);
-  }
-
   result += ch;
   int offset = result.length() - 1;
 
   // booleans
   if (result == "true")
-  {
     return Token(TokenType::BOOL_VAL, result, line, column - offset);
-  }
   else if (result == "false")
-  {
     return Token(TokenType::BOOL_VAL, result, line, column - offset);
-  }
 
   // null
   else if (result == "null")
-  {
     return Token(TokenType::NULL_VAL, result, line, column - offset);
-  }
 
   // data types
   else if (result == "int")
-  {
     return Token(TokenType::INT_TYPE, result, line, column - offset);
-  }
   else if (result == "double")
-  {
     return Token(TokenType::DOUBLE_TYPE, result, line, column - offset);
-  }
   else if (result == "bool")
-  {
     return Token(TokenType::BOOL_TYPE, result, line, column - offset);
-  }
   else if (result == "string")
-  {
     return Token(TokenType::STRING_TYPE, result, line, column - offset);
-  }
   else if (result == "char")
-  {
     return Token(TokenType::CHAR_TYPE, result, line, column - offset);
-  }
   else if (result == "void")
-  {
     return Token(TokenType::VOID_TYPE, result, line, column - offset);
-  }
 
   // objects
   else if (result == "struct")
-  {
     return Token(TokenType::STRUCT, result, line, column - offset);
-  }
   else if (result == "array")
-  {
     return Token(TokenType::ARRAY, result, line, column - offset);
-  }
 
   // loops
   else if (result == "for")
-  {
     return Token(TokenType::FOR, result, line, column - offset);
-  }
   else if (result == "while")
-  {
     return Token(TokenType::WHILE, result, line, column - offset);
-  }
 
   // branches
   else if (result == "if")
-  {
     return Token(TokenType::IF, result, line, column - offset);
-  }
   else if (result == "elseif")
-  {
     return Token(TokenType::ELSEIF, result, line, column - offset);
-  }
   else if (result == "else")
-  {
     return Token(TokenType::ELSE, result, line, column - offset);
-  }
 
   // logical operators
   else if (result == "and")
-  {
     return Token(TokenType::AND, result, line, column - offset);
-  }
   else if (result == "or")
-  {
     return Token(TokenType::OR, result, line, column - offset);
-  }
   else if (result == "not")
-  {
     return Token(TokenType::NOT, result, line, column - offset);
-  }
 
   // others
   else if (result == "new")
-  {
     return Token(TokenType::NEW, result, line, column - offset);
-  }
   else if (result == "return")
-  {
     return Token(TokenType::RETURN, result, line, column - offset);
-  }
 
   // anything else has to be an identifier or invalid
   if (!(isalpha(peek()) || isdigit(peek()) || match(peek(), '_')))
-  {
     return Token(TokenType::ID, result, line, column - offset);
-  }
   // check nums, letters, and underscores
   else
   {
@@ -450,6 +359,5 @@ Token Lexer::next_token()
 
   result += ch;
   offset = result.length() - 1;
-
   return Token(TokenType::ID, result, line, column - offset);
 }

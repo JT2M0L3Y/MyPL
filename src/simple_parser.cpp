@@ -93,22 +93,16 @@ void SimpleParser::fields()
 void SimpleParser::fun_def()
 {
   if (match(TokenType::VOID_TYPE))
-  {
     eat(TokenType::VOID_TYPE, "expecting 'void'");
-  }
   else
-  {
     data_type();
-  }
   eat(TokenType::ID, "expecting identifier");
   eat(TokenType::LPAREN, "expecting '('");
   params();
   eat(TokenType::RPAREN, "expecting ')'");
   eat(TokenType::LBRACE, "expecting '{'");
   while (!match(TokenType::RBRACE))
-  {
     stmt();
-  }
   eat(TokenType::RBRACE, "expecting '}'");
 }
 
@@ -133,25 +127,17 @@ void SimpleParser::data_type()
   {
     eat(curr_token.type(), "expecting base type");
     if (!match(TokenType::ID))
-    {
       error("expecting identifier after base type");
-    }
   }
   else if (match(TokenType::ID))
-  {
     eat(TokenType::ID, "expecting identifier");
-  }
   else if (match(TokenType::ARRAY))
   {
     eat(TokenType::ARRAY, "expecting 'array'");
     if (base_type())
-    {
       eat(curr_token.type(), "expecting base type");
-    }
     else if (match(TokenType::ID))
-    {
       eat(TokenType::ID, "expecting identifier");
-    }
   }
 }
 
@@ -165,57 +151,37 @@ bool SimpleParser::base_type()
 void SimpleParser::stmt()
 {
   if (match(TokenType::IF))
-  {
     if_stmt();
-  }
   else if (match(TokenType::WHILE))
-  {
     while_stmt();
-  }
   else if (match(TokenType::FOR))
-  {
     for_stmt();
-  }
   else if (match(TokenType::RETURN))
-  {
     ret_stmt();
-  }
   else if (match(TokenType::ARRAY) || base_type())
-  {
     vdecl_stmt();
-  }
   else if (match(TokenType::ID))
   {
     eat(TokenType::ID, "expecting identifier");
+    // assign_stmt
     if (match({TokenType::DOT, TokenType::LBRACKET}))
-    {
-      // assign_stmt
       assign_stmt();
-    }
+    // call_expr
     else if (match(TokenType::LPAREN))
-    {
-      // call_expr
       call_expr();
-    }
+    // vdecl_stmt
     else
-    {
-      // vdecl_stmt
       vdecl_stmt();
-    }
   }
   else
-  {
     error("expecting statement");
-  }
 }
 
 void SimpleParser::vdecl_stmt()
 {
   data_type();
   if (!match(TokenType::ASSIGN))
-  {
     eat(TokenType::ID, "expecting identifier");
-  }
   eat(TokenType::ASSIGN, "expecting '='");
   expr();
 }
@@ -230,9 +196,7 @@ void SimpleParser::assign_stmt()
 void SimpleParser::lvalue()
 {
   if (match(TokenType::ID))
-  {
     eat(TokenType::ID, "expecting identifier");
-  }
   while (match({TokenType::DOT, TokenType::LBRACKET}))
   {
     if (match(TokenType::DOT))
@@ -257,9 +221,7 @@ void SimpleParser::if_stmt()
   eat(TokenType::RPAREN, "expecting ')'");
   eat(TokenType::LBRACE, "expecting '{'");
   while (!match(TokenType::RBRACE))
-  {
     stmt();
-  }
   eat(TokenType::RBRACE, "expecting '}'");
   if_stmt_t();
 }
@@ -272,9 +234,7 @@ void SimpleParser::if_stmt_t()
     expr();
     eat(TokenType::LBRACE, "expecting '{'");
     while (!match(TokenType::RBRACE))
-    {
       stmt();
-    }
     eat(TokenType::RBRACE, "expecting '}'");
     if_stmt_t();
   }
@@ -283,9 +243,7 @@ void SimpleParser::if_stmt_t()
     eat(TokenType::ELSE, "expecting 'else'");
     eat(TokenType::LBRACE, "expecting '{'");
     while (!match(TokenType::RBRACE))
-    {
       stmt();
-    }
     eat(TokenType::RBRACE, "expecting '}'");
   }
 }
@@ -296,9 +254,7 @@ void SimpleParser::while_stmt()
   expr();
   eat(TokenType::LBRACE, "expecting '{'");
   while (!match(TokenType::RBRACE))
-  {
     stmt();
-  }
   eat(TokenType::RBRACE, "expecting '}'");
 }
 
@@ -316,15 +272,10 @@ void SimpleParser::for_stmt()
   if (!match(TokenType::RBRACE))
   {
     while (!match(TokenType::RBRACE))
-    {
       stmt();
-    }
   }
   else 
-  {
     error("expecting stmt in loop");
-  }
-
   eat(TokenType::RBRACE, "expecting '}'");
 }
 
@@ -365,13 +316,9 @@ void SimpleParser::expr()
   }
   else if (base_rvalue() || match({TokenType::NULL_VAL, 
           TokenType::NEW, TokenType::ID}))
-  {
     rvalue();
-  }
   else
-  {
     error("expecting expression");
-  }
 
   if (bin_op())
   {
@@ -383,28 +330,18 @@ void SimpleParser::expr()
 void SimpleParser::rvalue()
 {
   if (match(TokenType::NULL_VAL))
-  {
     eat(TokenType::NULL_VAL, "expecting 'null'");
-  }
   else if (base_rvalue())
-  {
     eat(curr_token.type(), "expecting base value");
-  }
   else if (match(TokenType::NEW))
-  {
     new_rvalue();
-  }
   else if (match(TokenType::ID))
   {
     eat(TokenType::ID, "expecting identifier");
     if (match(TokenType::LPAREN))
-    {
       call_expr();
-    }
     else if (match({TokenType::DOT, TokenType::LBRACKET}))
-    {
       var_rvalue();
-    }
   }
 }
 
