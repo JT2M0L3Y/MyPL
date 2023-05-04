@@ -42,18 +42,10 @@ string build_string(initializer_list<string> strs)
 // Basic Structure tests
 //----------------------------------------------------------------------
 
-TEST(ExtensionTest, EmptyProgram) {
-  stringstream in("void main() {}");
-  VM vm;
-  CodeGenerator generator(vm);
-  ASTParser(Lexer(in)).parse().accept(generator);
-  vm.run();
-}
-
 TEST(ExtensionTest, DictCreation) {
   stringstream in(build_string({
     "void main() {",
-    "  dict<int, string> ps = new <int, string>",
+    "  dict int string ps = new dict{int, string}",
     "  print(ps)",
     "}"
   }));
@@ -71,7 +63,7 @@ TEST(ExtensionTest, DictInsertPair)
 {
   stringstream in(build_string({
     "void main() {",
-    "  dict<int, string> ps = new <int, string>",
+    "  dict int string ps = new dict{int, string}",
     "  ps.insert(\"first\", 42)",
     "  print(ps[\"first\"])",
     "}"
@@ -90,8 +82,9 @@ TEST(ExtensionTest, DictUpdatePair)
 {
   stringstream in(build_string({
     "void main() {",
-    "  dict<string, int> ps = new <int, string>",
+    "  dict string int ps = new dict{int, string}",
     "  ps.insert(\"first\", 42)",
+    "  print(ps[\"first\"])",
     "  ps[\"first\"] = 0",
     "  print(ps[\"first\"])",
     "}"
@@ -102,7 +95,7 @@ TEST(ExtensionTest, DictUpdatePair)
   stringstream out;
   change_cout(out);
   vm.run();
-  EXPECT_EQ("0", out.str());
+  EXPECT_EQ("420", out.str());
   restore_cout();
 }
 

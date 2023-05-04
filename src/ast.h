@@ -1,7 +1,7 @@
 //----------------------------------------------------------------------
 // FILE: ast.h
 // DATE: Spring 2023
-// AUTH: S. Bowers
+// AUTH: Jonathan Smoley
 // DESC: Interface for MyPL abstract syntax tree (plain-old data) types
 //----------------------------------------------------------------------
 
@@ -112,6 +112,7 @@ class DataType
 {
 public:
   bool is_array = false;
+  bool is_dict = false;
   std::string type_name;
 };
 

@@ -1,7 +1,7 @@
 //----------------------------------------------------------------------
 // FILE: token.h
 // DATE: CPSC 326, Spring 2023
-// AUTH: S. Bowers
+// AUTH: Jonathan Smoley
 // DESC: Interface for MyPL token objects
 //----------------------------------------------------------------------
 
@@ -25,7 +25,9 @@ enum class TokenType {
   // primitive data types
   INT_TYPE, DOUBLE_TYPE, BOOL_TYPE, STRING_TYPE, CHAR_TYPE, VOID_TYPE, 
   // reserved words
-  STRUCT, ARRAY, FOR, WHILE, IF, ELSEIF, ELSE, AND, OR, NOT, NEW, RETURN
+  STRUCT, ARRAY, FOR, WHILE, IF, ELSEIF, ELSE, AND, OR, NOT, NEW, RETURN,
+  // added token types
+  DICT, LANGLEBRACKET, RANGLEBRACKET
 };
 
 

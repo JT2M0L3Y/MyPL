@@ -187,15 +187,28 @@ void ASTParser::data_type(VarDef& v)
   {
     v.data_type.is_array = true;
     eat(TokenType::ARRAY, "expecting 'array'");
-    if (base_type())
+    if (base_type() || match(TokenType::ID))
     {
       v.data_type.type_name = curr_token.lexeme();
-      eat(curr_token.type(), "expecting base type");
+      eat(curr_token.type(), "expecting array type");
     }
-    else if (match(TokenType::ID))
+  }
+  else if (match(TokenType::DICT))
+  {
+    v.data_type.is_dict = true;
+    eat(TokenType::DICT, "expecting 'dict'");
+    // parse key type
+    if (match({TokenType::ID, TokenType::STRING_TYPE, 
+              TokenType::INT_TYPE, TokenType::CHAR_TYPE}))
     {
       v.data_type.type_name = curr_token.lexeme();
-      eat(TokenType::ID, "expecting identifier");
+      eat(curr_token.type(), "expecting type for key");
+    }
+    // parse value type
+    if (base_type() || match({TokenType::ID, TokenType::ARRAY}))
+    {
+      v.data_type.type_name = curr_token.lexeme();
+      eat(curr_token.type(), "expecting type for value");
     }
   }
 }
@@ -237,7 +250,7 @@ void ASTParser::stmt(std::vector<std::shared_ptr<Stmt>>& s)
       ret_stmt(rStmt);
       s.push_back(make_shared<ReturnStmt>(rStmt));
     }
-    else if (match(TokenType::ARRAY) || base_type())
+    else if (match({TokenType::ARRAY, TokenType::DICT}) || base_type())
     {
       VarDeclStmt vDecl;
       data_type(vDecl.var_def);
@@ -568,6 +581,25 @@ void ASTParser::new_rvalue(NewRValue& nRVal)
       nRVal.array_expr = make_optional<Expr>(e);
       eat(TokenType::RBRACKET, "expecting ']'");
     }
+  }
+  else if (match(TokenType::DICT))
+  {
+    nRVal.type = curr_token;
+    advance();
+    eat(TokenType::LBRACE, "expecting start of dict decl");
+    if (match({TokenType::ID, TokenType::STRING_TYPE, 
+                TokenType::INT_TYPE, TokenType::CHAR_TYPE}))
+    {
+      //! LEFT OFF HERE
+      Expr e;
+      expr(e);
+    }
+    eat(TokenType::COMMA, "expecting comma");
+    if (base_type() || match({TokenType::ID, TokenType::ARRAY}))
+    {
+
+    }
+    eat(TokenType::RBRACE, "expecting end of dict decl");
   }
   else
   {

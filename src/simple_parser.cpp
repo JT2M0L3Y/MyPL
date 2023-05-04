@@ -108,7 +108,7 @@ void SimpleParser::fun_def()
 
 void SimpleParser::params()
 {
-  if (base_type() || match({TokenType::ID, TokenType::ARRAY}))
+  if (base_type() || match({TokenType::ID, TokenType::ARRAY, TokenType::DICT}))
   {
     data_type();
     eat(TokenType::ID, "expecting identifier");
@@ -139,6 +139,18 @@ void SimpleParser::data_type()
     else if (match(TokenType::ID))
       eat(TokenType::ID, "expecting identifier");
   }
+  else if (match(TokenType::DICT))
+  {
+    //! dict data type added to simple parser
+    advance();
+    if (!match({TokenType::ID, TokenType::STRING_TYPE, 
+                TokenType::INT_TYPE, TokenType::CHAR_TYPE}))
+      error("expecting key type");
+    advance();
+    if (!base_type() && !match({TokenType::ID, TokenType::ARRAY}))
+      error("expecting value type");
+    advance();
+  }
 }
 
 bool SimpleParser::base_type()
@@ -158,7 +170,7 @@ void SimpleParser::stmt()
     for_stmt();
   else if (match(TokenType::RETURN))
     ret_stmt();
-  else if (match(TokenType::ARRAY) || base_type())
+  else if (match({TokenType::ARRAY, TokenType::DICT}) || base_type())
     vdecl_stmt();
   else if (match(TokenType::ID))
   {
@@ -357,6 +369,21 @@ void SimpleParser::new_rvalue()
       expr();
       eat(TokenType::RBRACKET, "expecting ']'");
     }
+  }
+  //! new dict rvalue decl
+  else if (match(TokenType::DICT))
+  {
+    advance();
+    eat(TokenType::LBRACE, "expecting start of dict decl");
+    if (!match({TokenType::ID, TokenType::STRING_TYPE, 
+                TokenType::INT_TYPE, TokenType::CHAR_TYPE}))
+      error("expecting valid key type");
+    advance();
+    eat(TokenType::COMMA, "expecting comma");
+    if (!base_type() && !match({TokenType::ID, TokenType::ARRAY}))
+      error("expecting valid value type");
+    advance();
+    eat(TokenType::RBRACE, "expecting end of dict decl");
   }
   else
   {

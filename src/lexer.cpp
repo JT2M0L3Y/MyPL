@@ -272,7 +272,7 @@ Token Lexer::next_token()
       return Token(TokenType::INT_VAL, result, line, column - offset);
     }
   }
-  
+
   // check for reserved words
   string result = "";
   while (isalpha(peek()))
@@ -314,6 +314,8 @@ Token Lexer::next_token()
     return Token(TokenType::STRUCT, result, line, column - offset);
   else if (result == "array")
     return Token(TokenType::ARRAY, result, line, column - offset);
+  else if (result == "dict")
+    return Token(TokenType::DICT, result, line, column - offset);
 
   // loops
   else if (result == "for")
