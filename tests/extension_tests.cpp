@@ -39,24 +39,72 @@ string build_string(initializer_list<string> strs)
 }
 
 //----------------------------------------------------------------------
-// Initialization tests
+// Basic Structure tests
 //----------------------------------------------------------------------
 
-//----------------------------------------------------------------------
-// Update tests
-//----------------------------------------------------------------------
+TEST(ExtensionTest, EmptyProgram) {
+  stringstream in("void main() {}");
+  VM vm;
+  CodeGenerator generator(vm);
+  ASTParser(Lexer(in)).parse().accept(generator);
+  vm.run();
+}
 
-//----------------------------------------------------------------------
-// Access tests
-//----------------------------------------------------------------------
+TEST(ExtensionTest, DictCreation) {
+  stringstream in(build_string({
+    "void main() {",
+    "  dict<int, string> ps = new <int, string>",
+    "  print(ps)",
+    "}"
+  }));
+  VM vm;
+  CodeGenerator generator(vm);
+  ASTParser(Lexer(in)).parse().accept(generator);
+  stringstream out;
+  change_cout(out);
+  vm.run();
+  EXPECT_EQ("2023", out.str());
+  restore_cout();
+}
 
-//----------------------------------------------------------------------
-// Param tests
-//----------------------------------------------------------------------
+TEST(ExtensionTest, DictInsertPair)
+{
+  stringstream in(build_string({
+    "void main() {",
+    "  dict<int, string> ps = new <int, string>",
+    "  ps.insert(\"first\", 42)",
+    "  print(ps[\"first\"])",
+    "}"
+  }));
+  VM vm;
+  CodeGenerator generator(vm);
+  ASTParser(Lexer(in)).parse().accept(generator);
+  stringstream out;
+  change_cout(out);
+  vm.run();
+  EXPECT_EQ("42", out.str());
+  restore_cout();
+}
 
-//----------------------------------------------------------------------
-// Built-in tests
-//----------------------------------------------------------------------
+TEST(ExtensionTest, DictUpdatePair)
+{
+  stringstream in(build_string({
+    "void main() {",
+    "  dict<string, int> ps = new <int, string>",
+    "  ps.insert(\"first\", 42)",
+    "  ps[\"first\"] = 0",
+    "  print(ps[\"first\"])",
+    "}"
+  }));
+  VM vm;
+  CodeGenerator generator(vm);
+  ASTParser(Lexer(in)).parse().accept(generator);
+  stringstream out;
+  change_cout(out);
+  vm.run();
+  EXPECT_EQ("0", out.str());
+  restore_cout();
+}
 
 //----------------------------------------------------------------------
 // main
