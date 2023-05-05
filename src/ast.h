@@ -113,9 +113,9 @@ class DataType
 public:
   bool is_array = false;
   bool is_dict = false;
-  std::string type_name;
+  // std::string type_name;
+  std::vector<std::string> type_names;
 };
-
 
 class VarDef
 {

@@ -49,9 +49,16 @@ void PrintVisitor::visit(FunDef &f)
   if (f.return_type.is_array)
   {
     out << "array ";
-    out << "[] ";
+    out << f.return_type.type_names[0] << " ";
   }
-  out << f.return_type.type_name << " ";
+  else if (f.return_type.is_dict)
+  {
+    out << "dict ";
+    out << f.return_type.type_names[0] << " ";
+    out << f.return_type.type_names[1] << " ";
+  }
+  else
+    out << f.return_type.type_names[0] << " ";
 
   // function name
   out << f.fun_name.lexeme() << "(";
@@ -62,11 +69,16 @@ void PrintVisitor::visit(FunDef &f)
     if (f.params[i].data_type.is_array)
     {
       out << "array ";
-      out << f.params[i].data_type.type_name;
-      out << "[] ";
+      out << f.params[i].data_type.type_names[0] << " ";
+    }
+    else if (f.params[i].data_type.is_dict)
+    {
+      out << "dict ";
+      out << f.params[i].data_type.type_names[0] << " ";
+      out << f.params[i].data_type.type_names[1] << " ";
     }
     else
-      out << f.params[i].data_type.type_name << " ";
+      out << f.params[i].data_type.type_names[0] << " ";
 
     // check for end of list
     if (i != f.params.size() - 1)
@@ -104,11 +116,16 @@ void PrintVisitor::visit(StructDef &s)
     if (s.fields[i].data_type.is_array)
     {
       out << "array ";
-      out << s.fields[i].data_type.type_name;
-      out << "[] ";
+      out << s.fields[i].data_type.type_names[0] << " ";
+    }
+    else if (s.fields[i].data_type.is_dict)
+    {
+      out << "dict ";
+      out << s.fields[i].data_type.type_names[0] << " ";
+      out << s.fields[i].data_type.type_names[1] << " ";
     }
     else
-      out << s.fields[i].data_type.type_name << " ";
+      out << s.fields[i].data_type.type_names[0] << " ";
 
     if (i == s.fields.size() - 1)
       out << s.fields[i].var_name.lexeme() << "\n";
@@ -234,11 +251,16 @@ void PrintVisitor::visit(VarDeclStmt &s)
   if (s.var_def.data_type.is_array)
   {
     out << "array ";
-    out << s.var_def.data_type.type_name;
-    out << "[] ";
+    out << s.var_def.data_type.type_names[0] << " ";
+  }
+  else if (s.var_def.data_type.is_dict)
+  {
+    out << "dict ";
+    out << s.var_def.data_type.type_names[0] << " ";
+    out << s.var_def.data_type.type_names[1] << " ";
   }
   else
-    out << s.var_def.data_type.type_name << " ";
+    out << s.var_def.data_type.type_names[0] << " ";
   
   out << s.var_def.var_name.lexeme() << " = ";
   s.expr.accept(*this);
@@ -335,6 +357,20 @@ void PrintVisitor::visit(SimpleRValue &v)
 void PrintVisitor::visit(NewRValue &v)
 {
   out << "new " << v.type.lexeme();
+  if (v.array_expr.has_value())
+  {
+    out << "[";
+    v.array_expr->accept(*this);
+    out << "]";
+  }
+  else if (v.dict_expr.has_value())
+  {
+    out << "{";
+    v.dict_expr->operator[](0).accept(*this);
+    out << ", ";
+    v.dict_expr->operator[](1).accept(*this);
+    out << "}";
+  }
 }
 
 void PrintVisitor::visit(VarRValue &v)

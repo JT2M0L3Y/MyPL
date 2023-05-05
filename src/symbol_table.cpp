@@ -67,7 +67,7 @@ string to_string(const SymbolTable& symbol_table)
   for (auto env : symbol_table.environments) {
     str += "environment: [";
     for(const auto& [var, type] : env) {
-      str += "\n  " + var + " -> " + type.type_name;
+      str += "\n  " + var + " -> " + type.type_names[0];
       if (type.is_array)
         str += " (is_array = true)";
       else

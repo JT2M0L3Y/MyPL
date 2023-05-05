@@ -56,7 +56,7 @@ void CodeGenerator::visit(FunDef& f)
     s->accept(*this);
   // add a return if last stmt was not a return
   int instr_count = curr_frame.instructions.size();
-  if (f.stmts.size() == 0 || (f.return_type.type_name == "void" && 
+  if (f.stmts.size() == 0 || (f.return_type.type_names[0] == "void" && 
       curr_frame.instructions[instr_count - 1].opcode() != OpCode::RET)) 
   {
     curr_frame.instructions.push_back(VMInstr::PUSH(nullptr));

@@ -64,7 +64,7 @@ TEST(ExtensionTest, DictInsertPair)
   stringstream in(build_string({
     "void main() {",
     "  dict int string ps = new dict{int, string}",
-    "  ps.insert(\"first\", 42)",
+    "  ps[\"first\"] = 42",
     "  print(ps[\"first\"])",
     "}"
   }));
@@ -83,7 +83,7 @@ TEST(ExtensionTest, DictUpdatePair)
   stringstream in(build_string({
     "void main() {",
     "  dict string int ps = new dict{int, string}",
-    "  ps.insert(\"first\", 42)",
+    "  ps[\"first\"] = 42",
     "  print(ps[\"first\"])",
     "  ps[\"first\"] = 0",
     "  print(ps[\"first\"])",
