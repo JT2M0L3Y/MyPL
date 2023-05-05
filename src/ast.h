@@ -203,7 +203,8 @@ class VarRef
 {
 public:
   Token var_name;
-  std::optional<Expr> array_expr = std::nullopt; 
+  std::optional<Expr> array_expr = std::nullopt;
+  std::optional<Expr> dict_expr = std::nullopt;
 };
 
 

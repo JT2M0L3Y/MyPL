@@ -269,12 +269,38 @@ void PrintVisitor::visit(VarDeclStmt &s)
 void PrintVisitor::visit(AssignStmt &s)
 {
   if (s.lvalue.size() == 1)
+  {
     out << s.lvalue.front().var_name.lexeme();
+    if (s.lvalue.front().array_expr.has_value())
+    {
+      out << "[";
+      s.lvalue.front().array_expr->accept(*this);
+      out << "]";
+    }
+    else if (s.lvalue.front().dict_expr.has_value())
+    {
+      out << "[";
+      s.lvalue.front().dict_expr->accept(*this);
+      out << "]";
+    }
+  }
   else
   {
     for (int i = 0; i < s.lvalue.size(); i++)
     {
       out << s.lvalue[i].var_name.lexeme();
+      if (s.lvalue[i].array_expr.has_value())
+      {
+        out << "[";
+        s.lvalue[i].array_expr->accept(*this);
+        out << "]";
+      }
+      else if (s.lvalue[i].dict_expr.has_value())
+      {
+        out << "[";
+        s.lvalue[i].dict_expr->accept(*this);
+        out << "]";
+      }
       if (i != s.lvalue.size() - 1)
         out << ".";
     }
@@ -376,15 +402,46 @@ void PrintVisitor::visit(NewRValue &v)
 void PrintVisitor::visit(VarRValue &v)
 {
   if (v.path.size() == 1)
+  {
     out << v.path.front().var_name.lexeme();
+    if (v.path.front().array_expr.has_value())
+    {
+      out << "[";
+      v.path.front().array_expr->accept(*this);
+      out << "]";
+    }
+    else if (v.path.front().dict_expr.has_value())
+    {
+      out << "[";
+      v.path.front().dict_expr->accept(*this);
+      out << "]";
+    }
+  }
   else
   {
     for (int i = 0; i < v.path.size(); i++)
     {
       if (i == 0)
+      {
         out << v.path[i].var_name.lexeme();
+        if (v.path[i].array_expr.has_value())
+        {
+          out << "[";
+          v.path[i].array_expr->accept(*this);
+          out << "]";
+        }
+        else if (v.path[i].dict_expr.has_value())
+        {
+          out << "[";
+          v.path[i].dict_expr->accept(*this);
+          out << "]";
+        }
+      }
       else
+      {
         out << "." << v.path[i].var_name.lexeme();
+        //! missing printing of dict & array within struct
+      }
     }
   }
 }
