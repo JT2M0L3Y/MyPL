@@ -504,7 +504,7 @@ void ASTParser::expr(Expr& e)
     e.first = make_shared<ComplexTerm>(cTerm);
     eat(TokenType::RPAREN, "expecting ')'");
   }
-  else if (base_rvalue() || match({TokenType::NULL_VAL,
+  else if (base_rvalue() || base_type() || match({TokenType::NULL_VAL,
                                    TokenType::NEW, TokenType::ID}))
   {
     SimpleTerm sTerm;
@@ -527,7 +527,7 @@ void ASTParser::expr(Expr& e)
 
 void ASTParser::rvalue(SimpleTerm& sTerm)
 {
-  if (match(TokenType::NULL_VAL) || base_rvalue())
+  if (match(TokenType::NULL_VAL) || base_rvalue() || base_type())
   {
     SimpleRValue sRVal;
     sRVal.value = curr_token;
@@ -586,20 +586,16 @@ void ASTParser::new_rvalue(NewRValue& nRVal)
   {
     nRVal.type = curr_token;
     advance();
-    eat(TokenType::LBRACE, "expecting start of dict decl");
-    if (match({TokenType::ID, TokenType::STRING_TYPE, 
-                TokenType::INT_TYPE, TokenType::CHAR_TYPE}))
-    {
-      //! LEFT OFF HERE
-      Expr e;
-      expr(e);
-    }
-    eat(TokenType::COMMA, "expecting comma");
-    if (base_type() || match({TokenType::ID, TokenType::ARRAY}))
-    {
-
-    }
-    eat(TokenType::RBRACE, "expecting end of dict decl");
+    eat(TokenType::LBRACE, "expecting '{'");
+    std::vector<Expr> types;
+    Expr e;
+    expr(e);
+    types.push_back(e);
+    eat(TokenType::COMMA, "expecting ','");
+    expr(e);
+    types.push_back(e);
+    nRVal.dict_expr = make_optional<std::vector<Expr>>(types);
+    eat(TokenType::RBRACE, "expecting '}'");
   }
   else
   {
