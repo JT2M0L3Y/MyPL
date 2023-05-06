@@ -117,6 +117,110 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named token_tests
+
+# Build rule for target.
+token_tests: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 token_tests
+.PHONY : token_tests
+
+# fast build rule for target.
+token_tests/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/token_tests.dir/build.make CMakeFiles/token_tests.dir/build
+.PHONY : token_tests/fast
+
+#=============================================================================
+# Target rules for targets named lexer_tests
+
+# Build rule for target.
+lexer_tests: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lexer_tests
+.PHONY : lexer_tests
+
+# fast build rule for target.
+lexer_tests/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lexer_tests.dir/build.make CMakeFiles/lexer_tests.dir/build
+.PHONY : lexer_tests/fast
+
+#=============================================================================
+# Target rules for targets named simple_parser_tests
+
+# Build rule for target.
+simple_parser_tests: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 simple_parser_tests
+.PHONY : simple_parser_tests
+
+# fast build rule for target.
+simple_parser_tests/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_parser_tests.dir/build.make CMakeFiles/simple_parser_tests.dir/build
+.PHONY : simple_parser_tests/fast
+
+#=============================================================================
+# Target rules for targets named ast_parser_tests
+
+# Build rule for target.
+ast_parser_tests: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ast_parser_tests
+.PHONY : ast_parser_tests
+
+# fast build rule for target.
+ast_parser_tests/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ast_parser_tests.dir/build.make CMakeFiles/ast_parser_tests.dir/build
+.PHONY : ast_parser_tests/fast
+
+#=============================================================================
+# Target rules for targets named parser_syntax_tests
+
+# Build rule for target.
+parser_syntax_tests: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 parser_syntax_tests
+.PHONY : parser_syntax_tests
+
+# fast build rule for target.
+parser_syntax_tests/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser_syntax_tests.dir/build.make CMakeFiles/parser_syntax_tests.dir/build
+.PHONY : parser_syntax_tests/fast
+
+#=============================================================================
+# Target rules for targets named semantic_checker_tests
+
+# Build rule for target.
+semantic_checker_tests: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 semantic_checker_tests
+.PHONY : semantic_checker_tests
+
+# fast build rule for target.
+semantic_checker_tests/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/semantic_checker_tests.dir/build.make CMakeFiles/semantic_checker_tests.dir/build
+.PHONY : semantic_checker_tests/fast
+
+#=============================================================================
+# Target rules for targets named vm_tests
+
+# Build rule for target.
+vm_tests: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 vm_tests
+.PHONY : vm_tests
+
+# fast build rule for target.
+vm_tests/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vm_tests.dir/build.make CMakeFiles/vm_tests.dir/build
+.PHONY : vm_tests/fast
+
+#=============================================================================
+# Target rules for targets named code_generator_tests
+
+# Build rule for target.
+code_generator_tests: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 code_generator_tests
+.PHONY : code_generator_tests
+
+# fast build rule for target.
+code_generator_tests/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/build
+.PHONY : code_generator_tests/fast
+
+#=============================================================================
 # Target rules for targets named extension_tests
 
 # Build rule for target.
@@ -147,6 +251,10 @@ src/ast_parser.o: src/ast_parser.cpp.o
 
 # target to build an object file
 src/ast_parser.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ast_parser_tests.dir/build.make CMakeFiles/ast_parser_tests.dir/src/ast_parser.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser_syntax_tests.dir/build.make CMakeFiles/parser_syntax_tests.dir/src/ast_parser.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/semantic_checker_tests.dir/build.make CMakeFiles/semantic_checker_tests.dir/src/ast_parser.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/src/ast_parser.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/ast_parser.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/ast_parser.cpp.o
 .PHONY : src/ast_parser.cpp.o
@@ -156,6 +264,10 @@ src/ast_parser.i: src/ast_parser.cpp.i
 
 # target to preprocess a source file
 src/ast_parser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ast_parser_tests.dir/build.make CMakeFiles/ast_parser_tests.dir/src/ast_parser.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser_syntax_tests.dir/build.make CMakeFiles/parser_syntax_tests.dir/src/ast_parser.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/semantic_checker_tests.dir/build.make CMakeFiles/semantic_checker_tests.dir/src/ast_parser.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/src/ast_parser.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/ast_parser.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/ast_parser.cpp.i
 .PHONY : src/ast_parser.cpp.i
@@ -165,6 +277,10 @@ src/ast_parser.s: src/ast_parser.cpp.s
 
 # target to generate assembly for a file
 src/ast_parser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ast_parser_tests.dir/build.make CMakeFiles/ast_parser_tests.dir/src/ast_parser.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser_syntax_tests.dir/build.make CMakeFiles/parser_syntax_tests.dir/src/ast_parser.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/semantic_checker_tests.dir/build.make CMakeFiles/semantic_checker_tests.dir/src/ast_parser.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/src/ast_parser.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/ast_parser.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/ast_parser.cpp.s
 .PHONY : src/ast_parser.cpp.s
@@ -174,6 +290,7 @@ src/code_generator.o: src/code_generator.cpp.o
 
 # target to build an object file
 src/code_generator.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/src/code_generator.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/code_generator.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/code_generator.cpp.o
 .PHONY : src/code_generator.cpp.o
@@ -183,6 +300,7 @@ src/code_generator.i: src/code_generator.cpp.i
 
 # target to preprocess a source file
 src/code_generator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/src/code_generator.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/code_generator.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/code_generator.cpp.i
 .PHONY : src/code_generator.cpp.i
@@ -192,6 +310,7 @@ src/code_generator.s: src/code_generator.cpp.s
 
 # target to generate assembly for a file
 src/code_generator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/src/code_generator.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/code_generator.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/code_generator.cpp.s
 .PHONY : src/code_generator.cpp.s
@@ -201,6 +320,12 @@ src/lexer.o: src/lexer.cpp.o
 
 # target to build an object file
 src/lexer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lexer_tests.dir/build.make CMakeFiles/lexer_tests.dir/src/lexer.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_parser_tests.dir/build.make CMakeFiles/simple_parser_tests.dir/src/lexer.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ast_parser_tests.dir/build.make CMakeFiles/ast_parser_tests.dir/src/lexer.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser_syntax_tests.dir/build.make CMakeFiles/parser_syntax_tests.dir/src/lexer.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/semantic_checker_tests.dir/build.make CMakeFiles/semantic_checker_tests.dir/src/lexer.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/src/lexer.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/lexer.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/lexer.cpp.o
 .PHONY : src/lexer.cpp.o
@@ -210,6 +335,12 @@ src/lexer.i: src/lexer.cpp.i
 
 # target to preprocess a source file
 src/lexer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lexer_tests.dir/build.make CMakeFiles/lexer_tests.dir/src/lexer.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_parser_tests.dir/build.make CMakeFiles/simple_parser_tests.dir/src/lexer.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ast_parser_tests.dir/build.make CMakeFiles/ast_parser_tests.dir/src/lexer.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser_syntax_tests.dir/build.make CMakeFiles/parser_syntax_tests.dir/src/lexer.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/semantic_checker_tests.dir/build.make CMakeFiles/semantic_checker_tests.dir/src/lexer.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/src/lexer.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/lexer.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/lexer.cpp.i
 .PHONY : src/lexer.cpp.i
@@ -219,6 +350,12 @@ src/lexer.s: src/lexer.cpp.s
 
 # target to generate assembly for a file
 src/lexer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lexer_tests.dir/build.make CMakeFiles/lexer_tests.dir/src/lexer.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_parser_tests.dir/build.make CMakeFiles/simple_parser_tests.dir/src/lexer.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ast_parser_tests.dir/build.make CMakeFiles/ast_parser_tests.dir/src/lexer.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser_syntax_tests.dir/build.make CMakeFiles/parser_syntax_tests.dir/src/lexer.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/semantic_checker_tests.dir/build.make CMakeFiles/semantic_checker_tests.dir/src/lexer.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/src/lexer.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/lexer.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/lexer.cpp.s
 .PHONY : src/lexer.cpp.s
@@ -252,6 +389,13 @@ src/mypl_exception.o: src/mypl_exception.cpp.o
 
 # target to build an object file
 src/mypl_exception.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lexer_tests.dir/build.make CMakeFiles/lexer_tests.dir/src/mypl_exception.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_parser_tests.dir/build.make CMakeFiles/simple_parser_tests.dir/src/mypl_exception.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ast_parser_tests.dir/build.make CMakeFiles/ast_parser_tests.dir/src/mypl_exception.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser_syntax_tests.dir/build.make CMakeFiles/parser_syntax_tests.dir/src/mypl_exception.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/semantic_checker_tests.dir/build.make CMakeFiles/semantic_checker_tests.dir/src/mypl_exception.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vm_tests.dir/build.make CMakeFiles/vm_tests.dir/src/mypl_exception.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/src/mypl_exception.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/mypl_exception.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/mypl_exception.cpp.o
 .PHONY : src/mypl_exception.cpp.o
@@ -261,6 +405,13 @@ src/mypl_exception.i: src/mypl_exception.cpp.i
 
 # target to preprocess a source file
 src/mypl_exception.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lexer_tests.dir/build.make CMakeFiles/lexer_tests.dir/src/mypl_exception.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_parser_tests.dir/build.make CMakeFiles/simple_parser_tests.dir/src/mypl_exception.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ast_parser_tests.dir/build.make CMakeFiles/ast_parser_tests.dir/src/mypl_exception.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser_syntax_tests.dir/build.make CMakeFiles/parser_syntax_tests.dir/src/mypl_exception.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/semantic_checker_tests.dir/build.make CMakeFiles/semantic_checker_tests.dir/src/mypl_exception.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vm_tests.dir/build.make CMakeFiles/vm_tests.dir/src/mypl_exception.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/src/mypl_exception.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/mypl_exception.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/mypl_exception.cpp.i
 .PHONY : src/mypl_exception.cpp.i
@@ -270,6 +421,13 @@ src/mypl_exception.s: src/mypl_exception.cpp.s
 
 # target to generate assembly for a file
 src/mypl_exception.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lexer_tests.dir/build.make CMakeFiles/lexer_tests.dir/src/mypl_exception.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_parser_tests.dir/build.make CMakeFiles/simple_parser_tests.dir/src/mypl_exception.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ast_parser_tests.dir/build.make CMakeFiles/ast_parser_tests.dir/src/mypl_exception.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser_syntax_tests.dir/build.make CMakeFiles/parser_syntax_tests.dir/src/mypl_exception.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/semantic_checker_tests.dir/build.make CMakeFiles/semantic_checker_tests.dir/src/mypl_exception.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vm_tests.dir/build.make CMakeFiles/vm_tests.dir/src/mypl_exception.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/src/mypl_exception.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/mypl_exception.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/mypl_exception.cpp.s
 .PHONY : src/mypl_exception.cpp.s
@@ -303,6 +461,7 @@ src/semantic_checker.o: src/semantic_checker.cpp.o
 
 # target to build an object file
 src/semantic_checker.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/semantic_checker_tests.dir/build.make CMakeFiles/semantic_checker_tests.dir/src/semantic_checker.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/semantic_checker.cpp.o
 .PHONY : src/semantic_checker.cpp.o
 
@@ -311,6 +470,7 @@ src/semantic_checker.i: src/semantic_checker.cpp.i
 
 # target to preprocess a source file
 src/semantic_checker.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/semantic_checker_tests.dir/build.make CMakeFiles/semantic_checker_tests.dir/src/semantic_checker.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/semantic_checker.cpp.i
 .PHONY : src/semantic_checker.cpp.i
 
@@ -319,6 +479,7 @@ src/semantic_checker.s: src/semantic_checker.cpp.s
 
 # target to generate assembly for a file
 src/semantic_checker.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/semantic_checker_tests.dir/build.make CMakeFiles/semantic_checker_tests.dir/src/semantic_checker.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/semantic_checker.cpp.s
 .PHONY : src/semantic_checker.cpp.s
 
@@ -327,6 +488,7 @@ src/simple_parser.o: src/simple_parser.cpp.o
 
 # target to build an object file
 src/simple_parser.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_parser_tests.dir/build.make CMakeFiles/simple_parser_tests.dir/src/simple_parser.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/simple_parser.cpp.o
 .PHONY : src/simple_parser.cpp.o
 
@@ -335,6 +497,7 @@ src/simple_parser.i: src/simple_parser.cpp.i
 
 # target to preprocess a source file
 src/simple_parser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_parser_tests.dir/build.make CMakeFiles/simple_parser_tests.dir/src/simple_parser.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/simple_parser.cpp.i
 .PHONY : src/simple_parser.cpp.i
 
@@ -343,6 +506,7 @@ src/simple_parser.s: src/simple_parser.cpp.s
 
 # target to generate assembly for a file
 src/simple_parser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_parser_tests.dir/build.make CMakeFiles/simple_parser_tests.dir/src/simple_parser.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/simple_parser.cpp.s
 .PHONY : src/simple_parser.cpp.s
 
@@ -351,6 +515,7 @@ src/symbol_table.o: src/symbol_table.cpp.o
 
 # target to build an object file
 src/symbol_table.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/semantic_checker_tests.dir/build.make CMakeFiles/semantic_checker_tests.dir/src/symbol_table.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/symbol_table.cpp.o
 .PHONY : src/symbol_table.cpp.o
 
@@ -359,6 +524,7 @@ src/symbol_table.i: src/symbol_table.cpp.i
 
 # target to preprocess a source file
 src/symbol_table.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/semantic_checker_tests.dir/build.make CMakeFiles/semantic_checker_tests.dir/src/symbol_table.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/symbol_table.cpp.i
 .PHONY : src/symbol_table.cpp.i
 
@@ -367,6 +533,7 @@ src/symbol_table.s: src/symbol_table.cpp.s
 
 # target to generate assembly for a file
 src/symbol_table.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/semantic_checker_tests.dir/build.make CMakeFiles/semantic_checker_tests.dir/src/symbol_table.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/symbol_table.cpp.s
 .PHONY : src/symbol_table.cpp.s
 
@@ -375,6 +542,13 @@ src/token.o: src/token.cpp.o
 
 # target to build an object file
 src/token.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/token_tests.dir/build.make CMakeFiles/token_tests.dir/src/token.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lexer_tests.dir/build.make CMakeFiles/lexer_tests.dir/src/token.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_parser_tests.dir/build.make CMakeFiles/simple_parser_tests.dir/src/token.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ast_parser_tests.dir/build.make CMakeFiles/ast_parser_tests.dir/src/token.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser_syntax_tests.dir/build.make CMakeFiles/parser_syntax_tests.dir/src/token.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/semantic_checker_tests.dir/build.make CMakeFiles/semantic_checker_tests.dir/src/token.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/src/token.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/token.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/token.cpp.o
 .PHONY : src/token.cpp.o
@@ -384,6 +558,13 @@ src/token.i: src/token.cpp.i
 
 # target to preprocess a source file
 src/token.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/token_tests.dir/build.make CMakeFiles/token_tests.dir/src/token.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lexer_tests.dir/build.make CMakeFiles/lexer_tests.dir/src/token.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_parser_tests.dir/build.make CMakeFiles/simple_parser_tests.dir/src/token.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ast_parser_tests.dir/build.make CMakeFiles/ast_parser_tests.dir/src/token.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser_syntax_tests.dir/build.make CMakeFiles/parser_syntax_tests.dir/src/token.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/semantic_checker_tests.dir/build.make CMakeFiles/semantic_checker_tests.dir/src/token.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/src/token.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/token.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/token.cpp.i
 .PHONY : src/token.cpp.i
@@ -393,6 +574,13 @@ src/token.s: src/token.cpp.s
 
 # target to generate assembly for a file
 src/token.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/token_tests.dir/build.make CMakeFiles/token_tests.dir/src/token.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lexer_tests.dir/build.make CMakeFiles/lexer_tests.dir/src/token.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_parser_tests.dir/build.make CMakeFiles/simple_parser_tests.dir/src/token.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ast_parser_tests.dir/build.make CMakeFiles/ast_parser_tests.dir/src/token.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser_syntax_tests.dir/build.make CMakeFiles/parser_syntax_tests.dir/src/token.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/semantic_checker_tests.dir/build.make CMakeFiles/semantic_checker_tests.dir/src/token.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/src/token.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/token.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/token.cpp.s
 .PHONY : src/token.cpp.s
@@ -402,6 +590,7 @@ src/var_table.o: src/var_table.cpp.o
 
 # target to build an object file
 src/var_table.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/src/var_table.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/var_table.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/var_table.cpp.o
 .PHONY : src/var_table.cpp.o
@@ -411,6 +600,7 @@ src/var_table.i: src/var_table.cpp.i
 
 # target to preprocess a source file
 src/var_table.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/src/var_table.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/var_table.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/var_table.cpp.i
 .PHONY : src/var_table.cpp.i
@@ -420,6 +610,7 @@ src/var_table.s: src/var_table.cpp.s
 
 # target to generate assembly for a file
 src/var_table.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/src/var_table.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/var_table.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/var_table.cpp.s
 .PHONY : src/var_table.cpp.s
@@ -429,6 +620,8 @@ src/vm.o: src/vm.cpp.o
 
 # target to build an object file
 src/vm.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vm_tests.dir/build.make CMakeFiles/vm_tests.dir/src/vm.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/src/vm.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/vm.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/vm.cpp.o
 .PHONY : src/vm.cpp.o
@@ -438,6 +631,8 @@ src/vm.i: src/vm.cpp.i
 
 # target to preprocess a source file
 src/vm.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vm_tests.dir/build.make CMakeFiles/vm_tests.dir/src/vm.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/src/vm.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/vm.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/vm.cpp.i
 .PHONY : src/vm.cpp.i
@@ -447,6 +642,8 @@ src/vm.s: src/vm.cpp.s
 
 # target to generate assembly for a file
 src/vm.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vm_tests.dir/build.make CMakeFiles/vm_tests.dir/src/vm.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/src/vm.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/vm.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/vm.cpp.s
 .PHONY : src/vm.cpp.s
@@ -456,6 +653,8 @@ src/vm_instr.o: src/vm_instr.cpp.o
 
 # target to build an object file
 src/vm_instr.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vm_tests.dir/build.make CMakeFiles/vm_tests.dir/src/vm_instr.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/src/vm_instr.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/vm_instr.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/vm_instr.cpp.o
 .PHONY : src/vm_instr.cpp.o
@@ -465,6 +664,8 @@ src/vm_instr.i: src/vm_instr.cpp.i
 
 # target to preprocess a source file
 src/vm_instr.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vm_tests.dir/build.make CMakeFiles/vm_tests.dir/src/vm_instr.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/src/vm_instr.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/vm_instr.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/vm_instr.cpp.i
 .PHONY : src/vm_instr.cpp.i
@@ -474,9 +675,59 @@ src/vm_instr.s: src/vm_instr.cpp.s
 
 # target to generate assembly for a file
 src/vm_instr.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vm_tests.dir/build.make CMakeFiles/vm_tests.dir/src/vm_instr.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/src/vm_instr.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/vm_instr.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/vm_instr.cpp.s
 .PHONY : src/vm_instr.cpp.s
+
+tests/ast_parser_tests.o: tests/ast_parser_tests.cpp.o
+.PHONY : tests/ast_parser_tests.o
+
+# target to build an object file
+tests/ast_parser_tests.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ast_parser_tests.dir/build.make CMakeFiles/ast_parser_tests.dir/tests/ast_parser_tests.cpp.o
+.PHONY : tests/ast_parser_tests.cpp.o
+
+tests/ast_parser_tests.i: tests/ast_parser_tests.cpp.i
+.PHONY : tests/ast_parser_tests.i
+
+# target to preprocess a source file
+tests/ast_parser_tests.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ast_parser_tests.dir/build.make CMakeFiles/ast_parser_tests.dir/tests/ast_parser_tests.cpp.i
+.PHONY : tests/ast_parser_tests.cpp.i
+
+tests/ast_parser_tests.s: tests/ast_parser_tests.cpp.s
+.PHONY : tests/ast_parser_tests.s
+
+# target to generate assembly for a file
+tests/ast_parser_tests.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ast_parser_tests.dir/build.make CMakeFiles/ast_parser_tests.dir/tests/ast_parser_tests.cpp.s
+.PHONY : tests/ast_parser_tests.cpp.s
+
+tests/code_generator_tests.o: tests/code_generator_tests.cpp.o
+.PHONY : tests/code_generator_tests.o
+
+# target to build an object file
+tests/code_generator_tests.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/tests/code_generator_tests.cpp.o
+.PHONY : tests/code_generator_tests.cpp.o
+
+tests/code_generator_tests.i: tests/code_generator_tests.cpp.i
+.PHONY : tests/code_generator_tests.i
+
+# target to preprocess a source file
+tests/code_generator_tests.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/tests/code_generator_tests.cpp.i
+.PHONY : tests/code_generator_tests.cpp.i
+
+tests/code_generator_tests.s: tests/code_generator_tests.cpp.s
+.PHONY : tests/code_generator_tests.s
+
+# target to generate assembly for a file
+tests/code_generator_tests.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/code_generator_tests.dir/build.make CMakeFiles/code_generator_tests.dir/tests/code_generator_tests.cpp.s
+.PHONY : tests/code_generator_tests.cpp.s
 
 tests/extension_tests.o: tests/extension_tests.cpp.o
 .PHONY : tests/extension_tests.o
@@ -502,6 +753,150 @@ tests/extension_tests.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/tests/extension_tests.cpp.s
 .PHONY : tests/extension_tests.cpp.s
 
+tests/lexer_tests.o: tests/lexer_tests.cpp.o
+.PHONY : tests/lexer_tests.o
+
+# target to build an object file
+tests/lexer_tests.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lexer_tests.dir/build.make CMakeFiles/lexer_tests.dir/tests/lexer_tests.cpp.o
+.PHONY : tests/lexer_tests.cpp.o
+
+tests/lexer_tests.i: tests/lexer_tests.cpp.i
+.PHONY : tests/lexer_tests.i
+
+# target to preprocess a source file
+tests/lexer_tests.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lexer_tests.dir/build.make CMakeFiles/lexer_tests.dir/tests/lexer_tests.cpp.i
+.PHONY : tests/lexer_tests.cpp.i
+
+tests/lexer_tests.s: tests/lexer_tests.cpp.s
+.PHONY : tests/lexer_tests.s
+
+# target to generate assembly for a file
+tests/lexer_tests.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lexer_tests.dir/build.make CMakeFiles/lexer_tests.dir/tests/lexer_tests.cpp.s
+.PHONY : tests/lexer_tests.cpp.s
+
+tests/parser_syntax_tests.o: tests/parser_syntax_tests.cpp.o
+.PHONY : tests/parser_syntax_tests.o
+
+# target to build an object file
+tests/parser_syntax_tests.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser_syntax_tests.dir/build.make CMakeFiles/parser_syntax_tests.dir/tests/parser_syntax_tests.cpp.o
+.PHONY : tests/parser_syntax_tests.cpp.o
+
+tests/parser_syntax_tests.i: tests/parser_syntax_tests.cpp.i
+.PHONY : tests/parser_syntax_tests.i
+
+# target to preprocess a source file
+tests/parser_syntax_tests.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser_syntax_tests.dir/build.make CMakeFiles/parser_syntax_tests.dir/tests/parser_syntax_tests.cpp.i
+.PHONY : tests/parser_syntax_tests.cpp.i
+
+tests/parser_syntax_tests.s: tests/parser_syntax_tests.cpp.s
+.PHONY : tests/parser_syntax_tests.s
+
+# target to generate assembly for a file
+tests/parser_syntax_tests.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parser_syntax_tests.dir/build.make CMakeFiles/parser_syntax_tests.dir/tests/parser_syntax_tests.cpp.s
+.PHONY : tests/parser_syntax_tests.cpp.s
+
+tests/semantic_checker_tests.o: tests/semantic_checker_tests.cpp.o
+.PHONY : tests/semantic_checker_tests.o
+
+# target to build an object file
+tests/semantic_checker_tests.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/semantic_checker_tests.dir/build.make CMakeFiles/semantic_checker_tests.dir/tests/semantic_checker_tests.cpp.o
+.PHONY : tests/semantic_checker_tests.cpp.o
+
+tests/semantic_checker_tests.i: tests/semantic_checker_tests.cpp.i
+.PHONY : tests/semantic_checker_tests.i
+
+# target to preprocess a source file
+tests/semantic_checker_tests.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/semantic_checker_tests.dir/build.make CMakeFiles/semantic_checker_tests.dir/tests/semantic_checker_tests.cpp.i
+.PHONY : tests/semantic_checker_tests.cpp.i
+
+tests/semantic_checker_tests.s: tests/semantic_checker_tests.cpp.s
+.PHONY : tests/semantic_checker_tests.s
+
+# target to generate assembly for a file
+tests/semantic_checker_tests.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/semantic_checker_tests.dir/build.make CMakeFiles/semantic_checker_tests.dir/tests/semantic_checker_tests.cpp.s
+.PHONY : tests/semantic_checker_tests.cpp.s
+
+tests/simple_parser_tests.o: tests/simple_parser_tests.cpp.o
+.PHONY : tests/simple_parser_tests.o
+
+# target to build an object file
+tests/simple_parser_tests.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_parser_tests.dir/build.make CMakeFiles/simple_parser_tests.dir/tests/simple_parser_tests.cpp.o
+.PHONY : tests/simple_parser_tests.cpp.o
+
+tests/simple_parser_tests.i: tests/simple_parser_tests.cpp.i
+.PHONY : tests/simple_parser_tests.i
+
+# target to preprocess a source file
+tests/simple_parser_tests.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_parser_tests.dir/build.make CMakeFiles/simple_parser_tests.dir/tests/simple_parser_tests.cpp.i
+.PHONY : tests/simple_parser_tests.cpp.i
+
+tests/simple_parser_tests.s: tests/simple_parser_tests.cpp.s
+.PHONY : tests/simple_parser_tests.s
+
+# target to generate assembly for a file
+tests/simple_parser_tests.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_parser_tests.dir/build.make CMakeFiles/simple_parser_tests.dir/tests/simple_parser_tests.cpp.s
+.PHONY : tests/simple_parser_tests.cpp.s
+
+tests/token_tests.o: tests/token_tests.cpp.o
+.PHONY : tests/token_tests.o
+
+# target to build an object file
+tests/token_tests.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/token_tests.dir/build.make CMakeFiles/token_tests.dir/tests/token_tests.cpp.o
+.PHONY : tests/token_tests.cpp.o
+
+tests/token_tests.i: tests/token_tests.cpp.i
+.PHONY : tests/token_tests.i
+
+# target to preprocess a source file
+tests/token_tests.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/token_tests.dir/build.make CMakeFiles/token_tests.dir/tests/token_tests.cpp.i
+.PHONY : tests/token_tests.cpp.i
+
+tests/token_tests.s: tests/token_tests.cpp.s
+.PHONY : tests/token_tests.s
+
+# target to generate assembly for a file
+tests/token_tests.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/token_tests.dir/build.make CMakeFiles/token_tests.dir/tests/token_tests.cpp.s
+.PHONY : tests/token_tests.cpp.s
+
+tests/vm_tests.o: tests/vm_tests.cpp.o
+.PHONY : tests/vm_tests.o
+
+# target to build an object file
+tests/vm_tests.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vm_tests.dir/build.make CMakeFiles/vm_tests.dir/tests/vm_tests.cpp.o
+.PHONY : tests/vm_tests.cpp.o
+
+tests/vm_tests.i: tests/vm_tests.cpp.i
+.PHONY : tests/vm_tests.i
+
+# target to preprocess a source file
+tests/vm_tests.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vm_tests.dir/build.make CMakeFiles/vm_tests.dir/tests/vm_tests.cpp.i
+.PHONY : tests/vm_tests.cpp.i
+
+tests/vm_tests.s: tests/vm_tests.cpp.s
+.PHONY : tests/vm_tests.s
+
+# target to generate assembly for a file
+tests/vm_tests.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/vm_tests.dir/build.make CMakeFiles/vm_tests.dir/tests/vm_tests.cpp.s
+.PHONY : tests/vm_tests.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -510,8 +905,16 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... ast_parser_tests"
+	@echo "... code_generator_tests"
 	@echo "... extension_tests"
+	@echo "... lexer_tests"
 	@echo "... mypl"
+	@echo "... parser_syntax_tests"
+	@echo "... semantic_checker_tests"
+	@echo "... simple_parser_tests"
+	@echo "... token_tests"
+	@echo "... vm_tests"
 	@echo "... src/ast_parser.o"
 	@echo "... src/ast_parser.i"
 	@echo "... src/ast_parser.s"
@@ -551,9 +954,33 @@ help:
 	@echo "... src/vm_instr.o"
 	@echo "... src/vm_instr.i"
 	@echo "... src/vm_instr.s"
+	@echo "... tests/ast_parser_tests.o"
+	@echo "... tests/ast_parser_tests.i"
+	@echo "... tests/ast_parser_tests.s"
+	@echo "... tests/code_generator_tests.o"
+	@echo "... tests/code_generator_tests.i"
+	@echo "... tests/code_generator_tests.s"
 	@echo "... tests/extension_tests.o"
 	@echo "... tests/extension_tests.i"
 	@echo "... tests/extension_tests.s"
+	@echo "... tests/lexer_tests.o"
+	@echo "... tests/lexer_tests.i"
+	@echo "... tests/lexer_tests.s"
+	@echo "... tests/parser_syntax_tests.o"
+	@echo "... tests/parser_syntax_tests.i"
+	@echo "... tests/parser_syntax_tests.s"
+	@echo "... tests/semantic_checker_tests.o"
+	@echo "... tests/semantic_checker_tests.i"
+	@echo "... tests/semantic_checker_tests.s"
+	@echo "... tests/simple_parser_tests.o"
+	@echo "... tests/simple_parser_tests.i"
+	@echo "... tests/simple_parser_tests.s"
+	@echo "... tests/token_tests.o"
+	@echo "... tests/token_tests.i"
+	@echo "... tests/token_tests.s"
+	@echo "... tests/vm_tests.o"
+	@echo "... tests/vm_tests.i"
+	@echo "... tests/vm_tests.s"
 .PHONY : help
 
 

@@ -1,0 +1,1 @@
+/usr/bin/c++ -O0 -g CMakeFiles/ast_parser_tests.dir/tests/ast_parser_tests.cpp.o CMakeFiles/ast_parser_tests.dir/src/token.cpp.o CMakeFiles/ast_parser_tests.dir/src/mypl_exception.cpp.o CMakeFiles/ast_parser_tests.dir/src/lexer.cpp.o CMakeFiles/ast_parser_tests.dir/src/ast_parser.cpp.o -o ast_parser_tests  /usr/lib/x86_64-linux-gnu/libgtest.a -lpthread 

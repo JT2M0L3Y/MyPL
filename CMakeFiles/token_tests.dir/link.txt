@@ -1,0 +1,1 @@
+/usr/bin/c++ -O0 -g CMakeFiles/token_tests.dir/tests/token_tests.cpp.o CMakeFiles/token_tests.dir/src/token.cpp.o -o token_tests  /usr/lib/x86_64-linux-gnu/libgtest.a -lpthread 

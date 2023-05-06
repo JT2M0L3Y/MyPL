@@ -1,0 +1,1 @@
+/usr/bin/c++ -O0 -g CMakeFiles/simple_parser_tests.dir/tests/simple_parser_tests.cpp.o CMakeFiles/simple_parser_tests.dir/src/token.cpp.o CMakeFiles/simple_parser_tests.dir/src/mypl_exception.cpp.o CMakeFiles/simple_parser_tests.dir/src/lexer.cpp.o CMakeFiles/simple_parser_tests.dir/src/simple_parser.cpp.o -o simple_parser_tests  /usr/lib/x86_64-linux-gnu/libgtest.a -lpthread 
