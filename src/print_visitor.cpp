@@ -422,25 +422,21 @@ void PrintVisitor::visit(VarRValue &v)
     for (int i = 0; i < v.path.size(); i++)
     {
       if (i == 0)
-      {
         out << v.path[i].var_name.lexeme();
-        if (v.path[i].array_expr.has_value())
-        {
-          out << "[";
-          v.path[i].array_expr->accept(*this);
-          out << "]";
-        }
-        else if (v.path[i].dict_expr.has_value())
-        {
-          out << "[";
-          v.path[i].dict_expr->accept(*this);
-          out << "]";
-        }
-      }
       else
-      {
         out << "." << v.path[i].var_name.lexeme();
-        //! missing printing of dict & array within struct
+        
+      if (v.path[i].array_expr.has_value())
+      {
+        out << "[";
+        v.path[i].array_expr->accept(*this);
+        out << "]";
+      }
+      else if (v.path[i].dict_expr.has_value())
+      {
+        out << "[";
+        v.path[i].dict_expr->accept(*this);
+        out << "]";
       }
     }
   }
