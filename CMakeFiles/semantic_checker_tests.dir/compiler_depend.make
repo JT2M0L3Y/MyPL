@@ -256,7 +256,8 @@ CMakeFiles/semantic_checker_tests.dir/src/ast_parser.cpp.o: src/ast_parser.cpp \
   /usr/include/c++/11/pstl/glue_memory_defs.h \
   /usr/include/c++/11/pstl/execution_defs.h \
   /usr/include/c++/11/optional \
-  /usr/include/c++/11/bits/enable_special_members.h
+  /usr/include/c++/11/bits/enable_special_members.h \
+  /usr/include/c++/11/iostream
 
 CMakeFiles/semantic_checker_tests.dir/src/lexer.cpp.o: src/lexer.cpp \
   /usr/include/stdc-predef.h \
@@ -1834,10 +1835,6 @@ src/semantic_checker.h:
 
 /usr/include/c++/11/bits/unordered_set.h:
 
-/usr/include/c++/11/iostream:
-
-/usr/include/c++/11/bits/node_handle.h:
-
 /usr/include/x86_64-linux-gnu/bits/statx-generic.h:
 
 /usr/include/c++/11/bits/hashtable_policy.h:
@@ -1847,6 +1844,8 @@ src/semantic_checker.h:
 src/semantic_checker.cpp:
 
 src/mypl_exception.cpp:
+
+src/lexer.cpp:
 
 /usr/include/pthread.h:
 
@@ -1903,6 +1902,10 @@ src/token.h:
 /usr/include/c++/11/backward/binders.h:
 
 /usr/include/x86_64-linux-gnu/sys/syscall.h:
+
+/usr/include/c++/11/bits/node_handle.h:
+
+/usr/include/c++/11/iostream:
 
 /usr/include/c++/11/bits/cxxabi_forced.h:
 
@@ -1989,8 +1992,6 @@ src/token.h:
 /usr/include/c++/11/ext/type_traits.h:
 
 /usr/include/c++/11/pstl/glue_memory_defs.h:
-
-src/lexer.cpp:
 
 /usr/include/c++/11/bits/char_traits.h:
 

@@ -256,7 +256,8 @@ CMakeFiles/extension_tests.dir/src/ast_parser.cpp.o: src/ast_parser.cpp \
   /usr/include/c++/11/pstl/glue_memory_defs.h \
   /usr/include/c++/11/pstl/execution_defs.h \
   /usr/include/c++/11/optional \
-  /usr/include/c++/11/bits/enable_special_members.h
+  /usr/include/c++/11/bits/enable_special_members.h \
+  /usr/include/c++/11/iostream
 
 CMakeFiles/extension_tests.dir/src/code_generator.cpp.o: src/code_generator.cpp \
   /usr/include/stdc-predef.h \
@@ -2254,9 +2255,7 @@ src/var_table.h:
 
 /usr/include/c++/11/unordered_map:
 
-/usr/include/c++/11/bits/node_handle.h:
-
-/usr/include/c++/11/iostream:
+src/code_generator.cpp:
 
 /usr/include/pthread.h:
 
@@ -2317,6 +2316,10 @@ tests/extension_tests.cpp:
 /usr/include/c++/11/backward/binders.h:
 
 /usr/include/x86_64-linux-gnu/sys/syscall.h:
+
+/usr/include/c++/11/bits/node_handle.h:
+
+/usr/include/c++/11/iostream:
 
 /usr/include/c++/11/bits/cxxabi_forced.h:
 
@@ -2851,5 +2854,3 @@ src/lexer.h:
 /usr/include/c++/11/bits/basic_ios.tcc:
 
 /usr/include/c++/11/bits/enable_special_members.h:
-
-src/code_generator.cpp:

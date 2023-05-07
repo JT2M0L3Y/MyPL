@@ -6,6 +6,7 @@
 //----------------------------------------------------------------------
 
 #include "ast_parser.h"
+#include <iostream>
 
 using namespace std;
 
@@ -169,13 +170,11 @@ void ASTParser::data_type(VarDef& v)
 {
   if (match(TokenType::VOID_TYPE))
   {
-    // v.data_type.type_name = curr_token.lexeme();
     v.data_type.type_names.push_back(curr_token.lexeme());
     eat(TokenType::VOID_TYPE, "expecting 'void'");
   }
   else if (base_type())
   {
-    // v.data_type.type_name = curr_token.lexeme();
     v.data_type.type_names.push_back(curr_token.lexeme());
     eat(curr_token.type(), "expecting base type");
     if (!match(TokenType::ID))
@@ -183,7 +182,6 @@ void ASTParser::data_type(VarDef& v)
   }
   else if (match(TokenType::ID))
   {
-    // v.data_type.type_name = curr_token.lexeme();
     v.data_type.type_names.push_back(curr_token.lexeme());
     eat(TokenType::ID, "expecting identifier");
   }
@@ -193,7 +191,6 @@ void ASTParser::data_type(VarDef& v)
     eat(TokenType::ARRAY, "expecting 'array'");
     if (base_type() || match(TokenType::ID))
     {
-      // v.data_type.type_name = curr_token.lexeme();
       v.data_type.type_names.push_back(curr_token.lexeme());
       eat(curr_token.type(), "expecting array type");
     }
@@ -206,14 +203,12 @@ void ASTParser::data_type(VarDef& v)
     if (match({TokenType::ID, TokenType::STRING_TYPE, 
               TokenType::INT_TYPE, TokenType::CHAR_TYPE}))
     {
-      // v.data_type.type_name = curr_token.lexeme();
       v.data_type.type_names.push_back(curr_token.lexeme());
       eat(curr_token.type(), "expecting type for key");
     }
     // parse value type
     if (base_type() || match({TokenType::ID, TokenType::ARRAY}))
     {
-      // v.data_type.type_name = curr_token.lexeme();
       v.data_type.type_names.push_back(curr_token.lexeme());
       eat(curr_token.type(), "expecting type for value");
     }
@@ -302,7 +297,6 @@ void ASTParser::stmt(std::vector<std::shared_ptr<Stmt>>& s)
       {
         VarDeclStmt vDecl;
         vdecl_stmt(vDecl);
-        // vDecl.var_def.data_type.type_name = id_token.lexeme();
         vDecl.var_def.data_type.type_names.push_back(id_token.lexeme());
         s.push_back(make_shared<VarDeclStmt>(vDecl));
       }
@@ -512,7 +506,8 @@ void ASTParser::expr(Expr& e)
     e.first = make_shared<ComplexTerm>(cTerm);
     eat(TokenType::RPAREN, "expecting ')'");
   }
-  else if (base_rvalue() || base_type() || match({TokenType::NULL_VAL, TokenType::NEW, TokenType::ID}))
+  else if (base_rvalue() || base_type() || match({TokenType::NULL_VAL, 
+          TokenType::NEW, TokenType::ID}))
   {
     SimpleTerm sTerm;
     rvalue(sTerm);

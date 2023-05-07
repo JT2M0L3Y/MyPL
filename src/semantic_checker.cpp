@@ -269,9 +269,12 @@ void SemanticChecker::visit(VarDeclStmt &s)
   DataType rhs_type = curr_type;
 
   // check var defined type matches rhs expr type
-  if ((lhs_type.type_names[0] != rhs_type.type_names[0]) && (rhs_type.type_names[0] != "void"))
-    error("type mismatch in var decl between '" + lhs_type.type_names[0] + "' and '" + 
-          rhs_type.type_names[0] + "'", s.expr.first_token());
+  for (int i = 0; i < lhs_type.type_names.size(); i++)
+  {
+    if ((lhs_type.type_names[i] != rhs_type.type_names[i]) && rhs_type.type_names[i] != "void")
+      error("type mismatch in var decl between '" + lhs_type.type_names[i] + "' and '" +
+                rhs_type.type_names[i] + "'", s.expr.first_token());
+  }
 
   // add var to environment
   symbol_table.add(s.var_def.var_name.lexeme(), s.var_def.data_type);
@@ -321,7 +324,7 @@ void SemanticChecker::visit(CallExpr &e)
         error("print expects 1 argument", e.fun_name);
       e.args[0].accept(*this);
       // check if valid arg type is passed
-      if (!BASE_TYPES.contains(curr_type.type_names[0]) && !curr_type.is_array)
+      if (!BASE_TYPES.contains(curr_type.type_names[0]) && !curr_type.is_array && !curr_type.is_dict)
         error("cannot print non-primitive type", e.args[0].first->first_token());
       curr_type = DataType{false, false, {"void"}};
     }
@@ -483,11 +486,11 @@ void SemanticChecker::visit(Expr &e)
       else
       {
         // check if used with non-comparable type
-        if (first.type_names[0] != rest.type_names[0])
+        if (first.type_names[0] != rest.type_names[0] || first.type_names[0] == "bool" || rest.type_names[0] == "bool"
+            || first.is_array || rest.is_array || first.is_dict || rest.is_dict)
           error("using relational ops on non-comparable types '" + first.type_names[0] +
                     "' and '" + rest.type_names[0] + "'", e.first->first_token());
       }
-
       curr_type = DataType{false, false, {"bool"}};
     }
   }
@@ -514,12 +517,30 @@ void SemanticChecker::visit(ComplexTerm &t)
 
 void SemanticChecker::visit(NewRValue &v)
 {
-  if (v.array_expr.has_value()) {
+  if (v.array_expr.has_value())
+  {
     v.array_expr->accept(*this);
     // check if name is valid
     if (curr_type.type_names[0] != "int")
       error("type '" + v.type.lexeme() + "' not defined", v.type);
     curr_type = DataType{true, false, {v.type.lexeme()}};
+  }
+  else if (v.dict_expr.has_value())
+  {
+    std::vector<std::string> types;
+    string type = v.dict_expr.value()[0].first_token().lexeme();
+
+    if (type != "string" && type != "int")
+      error("key type '" + type + "' not defined", v.type);
+    types.push_back(type);
+
+    type = v.dict_expr.value()[1].first_token().lexeme();
+
+    if (!BASE_TYPES.contains(type) && !struct_defs.contains(type))
+      error("value type '" + type + "' not defined", v.type);
+    types.push_back(type);
+
+    curr_type = DataType{false, true, types};
   }
   else
     curr_type = DataType{false, false, {v.type.lexeme()}};
@@ -530,18 +551,21 @@ void SemanticChecker::visit(VarRValue &v)
   if (!symbol_table.name_exists(v.path[0].var_name.lexeme()))
     error("variable '" + v.path[0].var_name.lexeme() + "' not defined", v.path[0].var_name);
   // check if defined
-  if (v.path[0].array_expr.has_value()) {
+  if (v.path[0].array_expr.has_value()) 
+  {
     v.path[0].array_expr->accept(*this);
     if (curr_type.type_names[0] != "int")
       error("type '" + v.path[0].var_name.lexeme() + "' not defined", v.path[0].var_name);
     curr_type = symbol_table.get(v.path[0].var_name.lexeme()).value();
   }
-  else {
+  else 
+  {
     // get type
     curr_type = *symbol_table.get(v.path[0].var_name.lexeme());
   }
   // complex paths
-  if (v.path.size() > 1) {
+  if (v.path.size() > 1) 
+  {
     DataType var_type = symbol_table.get(v.path[0].var_name.lexeme()).value();
     StructDef def = struct_defs[var_type.type_names[0]];
     for (int i = 1; i < v.path.size(); i++)
