@@ -1,5 +1,5 @@
 dict string int test(dict string int p2s) {
-  #p2s["second"] = 25
+  p2s["second"] = 25
   return p2s
 }
 
