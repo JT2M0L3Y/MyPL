@@ -2076,8 +2076,9 @@ CMakeFiles/extension_tests.dir/tests/extension_tests.cpp.o: tests/extension_test
   src/lexer.h \
   src/mypl_exception.h \
   src/token.h \
-  src/ast_parser.h \
+  src/simple_parser.h \
   src/lexer.h \
+  src/ast_parser.h \
   src/ast.h \
   src/semantic_checker.h \
   src/symbol_table.h \
@@ -2098,6 +2099,8 @@ CMakeFiles/extension_tests.dir/tests/extension_tests.cpp.o: tests/extension_test
 src/symbol_table.h:
 
 src/semantic_checker.h:
+
+src/simple_parser.h:
 
 /usr/include/gtest/gtest_pred_impl.h:
 

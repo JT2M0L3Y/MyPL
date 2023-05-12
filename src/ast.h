@@ -119,6 +119,7 @@ public:
 class VarDef
 {
 public:
+  //?? map of data types here
   DataType data_type;
   Token var_name;
   Token first_token() {return var_name;}

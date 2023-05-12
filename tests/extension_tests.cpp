@@ -11,7 +11,7 @@
 #include <gtest/gtest.h>
 #include "mypl_exception.h"
 #include "lexer.h"
-// #include "simple_parser.h"
+#include "simple_parser.h"
 #include "ast_parser.h"
 #include "semantic_checker.h"
 #include "vm.h"

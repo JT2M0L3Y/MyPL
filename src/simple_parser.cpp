@@ -141,7 +141,6 @@ void SimpleParser::data_type()
   }
   else if (match(TokenType::DICT))
   {
-    //! dict data type added to simple parser
     advance();
     if (!match({TokenType::ID, TokenType::STRING_TYPE, 
                 TokenType::INT_TYPE, TokenType::CHAR_TYPE}))

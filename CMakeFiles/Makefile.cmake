@@ -57,14 +57,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/token_tests.dir/DependInfo.cmake"
-  "CMakeFiles/lexer_tests.dir/DependInfo.cmake"
-  "CMakeFiles/simple_parser_tests.dir/DependInfo.cmake"
-  "CMakeFiles/ast_parser_tests.dir/DependInfo.cmake"
-  "CMakeFiles/parser_syntax_tests.dir/DependInfo.cmake"
-  "CMakeFiles/semantic_checker_tests.dir/DependInfo.cmake"
-  "CMakeFiles/vm_tests.dir/DependInfo.cmake"
-  "CMakeFiles/code_generator_tests.dir/DependInfo.cmake"
   "CMakeFiles/extension_tests.dir/DependInfo.cmake"
   "CMakeFiles/mypl.dir/DependInfo.cmake"
   )

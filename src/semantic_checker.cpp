@@ -579,6 +579,15 @@ void SemanticChecker::visit(VarRValue &v)
       error("type '" + v.path[0].var_name.lexeme() + "' not defined", v.path[0].var_name);
     curr_type = symbol_table.get(v.path[0].var_name.lexeme()).value();
   }
+  else if (v.path[0].dict_expr.has_value())
+  {
+    v.path[0].dict_expr->accept(*this);
+    if (curr_type.type_names[0] != "string" && curr_type.type_names[0] != "int")
+      error("type '" + v.path[0].var_name.lexeme() + "' not defined", v.path[0].var_name);
+    else if (!BASE_TYPES.contains(curr_type.type_names[1]))
+      error("type '" + v.path[0].var_name.lexeme() + "' not defined", v.path[1].var_name);
+    curr_type = symbol_table.get(v.path[0].var_name.lexeme()).value();
+  }
   else 
   {
     // get type

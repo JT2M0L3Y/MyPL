@@ -477,20 +477,11 @@ void VM::run(bool DEBUG)
     }
     else if (instr.opcode() == OpCode::ALLOCD) {
       // pop x and y
-      VMValue x = frame->operand_stack.top();
-      frame->operand_stack.pop();
-      VMValue y = frame->operand_stack.top();
-      frame->operand_stack.pop();
+      // VMValue x = frame->operand_stack.top();
+      // frame->operand_stack.pop();
+      // VMValue y = frame->operand_stack.top();
+      // frame->operand_stack.pop();
       // allocate dict in heap with y-type keys and x-type values
-      // if (get<string>(y) == "string" && get<string>(x) == "string")
-      // {
-      //   std::unordered_map<string, string> new_dict;
-      //   dict_heap[next_obj_id] = new_dict;
-      // }
-      // else if (get<string>(y) == "string" && get<string>(x) == "int")
-      // {
-        
-      // }
       // dict_heap[next_obj_id] = {nullptr, nullptr};
       ++next_obj_id;
     }

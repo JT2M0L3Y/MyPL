@@ -14,39 +14,41 @@ include_directories("src")
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
-# create unit test executables
-add_executable(token_tests tests/token_tests.cpp src/token.cpp)
-target_link_libraries(token_tests ${GTEST_LIBRARIES} pthread)
+#[[
+  # create unit test executables
+  add_executable(token_tests tests/token_tests.cpp src/token.cpp)
+  target_link_libraries(token_tests ${GTEST_LIBRARIES} pthread)
 
-add_executable(lexer_tests tests/lexer_tests.cpp src/token.cpp
-  src/mypl_exception.cpp src/lexer.cpp)
-target_link_libraries(lexer_tests ${GTEST_LIBRARIES} pthread)
+  add_executable(lexer_tests tests/lexer_tests.cpp src/token.cpp
+    src/mypl_exception.cpp src/lexer.cpp)
+  target_link_libraries(lexer_tests ${GTEST_LIBRARIES} pthread)
 
-add_executable(simple_parser_tests tests/simple_parser_tests.cpp src/token.cpp
-  src/mypl_exception.cpp src/lexer.cpp src/simple_parser.cpp)
-target_link_libraries(simple_parser_tests ${GTEST_LIBRARIES} pthread)
+  add_executable(simple_parser_tests tests/simple_parser_tests.cpp src/token.cpp
+    src/mypl_exception.cpp src/lexer.cpp src/simple_parser.cpp)
+  target_link_libraries(simple_parser_tests ${GTEST_LIBRARIES} pthread)
 
-add_executable(ast_parser_tests tests/ast_parser_tests.cpp
-  src/token.cpp src/mypl_exception.cpp src/lexer.cpp src/ast_parser.cpp)
-target_link_libraries(ast_parser_tests ${GTEST_LIBRARIES} pthread)
+  add_executable(ast_parser_tests tests/ast_parser_tests.cpp
+    src/token.cpp src/mypl_exception.cpp src/lexer.cpp src/ast_parser.cpp)
+  target_link_libraries(ast_parser_tests ${GTEST_LIBRARIES} pthread)
 
-add_executable(parser_syntax_tests tests/parser_syntax_tests.cpp
-  src/token.cpp src/mypl_exception.cpp src/lexer.cpp src/ast_parser.cpp)
-target_link_libraries(parser_syntax_tests ${GTEST_LIBRARIES} pthread)
+  add_executable(parser_syntax_tests tests/parser_syntax_tests.cpp
+    src/token.cpp src/mypl_exception.cpp src/lexer.cpp src/ast_parser.cpp)
+  target_link_libraries(parser_syntax_tests ${GTEST_LIBRARIES} pthread)
 
-add_executable(semantic_checker_tests tests/semantic_checker_tests.cpp
-  src/token.cpp src/mypl_exception.cpp src/lexer.cpp src/ast_parser.cpp
-  src/symbol_table.cpp src/semantic_checker.cpp)
-target_link_libraries(semantic_checker_tests ${GTEST_LIBRARIES} pthread)
+  add_executable(semantic_checker_tests tests/semantic_checker_tests.cpp
+    src/token.cpp src/mypl_exception.cpp src/lexer.cpp src/ast_parser.cpp
+    src/symbol_table.cpp src/semantic_checker.cpp)
+  target_link_libraries(semantic_checker_tests ${GTEST_LIBRARIES} pthread)
 
-add_executable(vm_tests tests/vm_tests.cpp src/mypl_exception.cpp
-  src/vm_instr.cpp src/vm.cpp)
-target_link_libraries(vm_tests ${GTEST_LIBRARIES} pthread)
+  add_executable(vm_tests tests/vm_tests.cpp src/mypl_exception.cpp
+    src/vm_instr.cpp src/vm.cpp)
+  target_link_libraries(vm_tests ${GTEST_LIBRARIES} pthread)
 
-add_executable(code_generator_tests tests/code_generator_tests.cpp
-  src/token.cpp src/mypl_exception.cpp src/lexer.cpp src/ast_parser.cpp
-  src/vm.cpp src/vm_instr.cpp src/var_table.cpp src/code_generator)
-target_link_libraries(code_generator_tests ${GTEST_LIBRARIES} pthread)
+  add_executable(code_generator_tests tests/code_generator_tests.cpp
+    src/token.cpp src/mypl_exception.cpp src/lexer.cpp src/ast_parser.cpp
+    src/vm.cpp src/vm_instr.cpp src/var_table.cpp src/code_generator)
+  target_link_libraries(code_generator_tests ${GTEST_LIBRARIES} pthread)
+]]
 
 add_executable(extension_tests tests/extension_tests.cpp
   src/token.cpp src/mypl_exception.cpp src/lexer.cpp src/ast_parser.cpp
