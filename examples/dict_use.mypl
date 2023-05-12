@@ -1,0 +1,26 @@
+dict string int test(dict string int p2s) {
+  #p2s["second"] = 25
+  return p2s
+}
+
+void main() {
+  # instantiation
+  dict string int ps = new dict{string, int}
+
+  # dict insert
+  ps["first"] = 0
+
+  # dict update
+  ps["first"] = 12
+
+  # dict access
+  int x = ps["first"]
+
+  # output dict state
+  print(ps["first"])
+  print(x)
+
+  # output new dict from function
+  dict string int ndict = test(ps)
+  print(ndict["second"])
+}

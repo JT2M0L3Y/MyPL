@@ -193,7 +193,7 @@ class NewRValue : public RValue
 public:
   Token type;
   std::optional<Expr> array_expr;
-  std::optional<std::vector<Expr>> dict_expr;
+  std::optional<Expr> dict_expr;
   void accept(Visitor& v) { v.visit(*this); }
   Token first_token() {return type;}
 };

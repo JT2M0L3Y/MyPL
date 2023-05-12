@@ -392,9 +392,7 @@ void PrintVisitor::visit(NewRValue &v)
   else if (v.dict_expr.has_value())
   {
     out << "{";
-    v.dict_expr->operator[](0).accept(*this);
-    out << ", ";
-    v.dict_expr->operator[](1).accept(*this);
+    v.dict_expr->accept(*this);
     out << "}";
   }
 }

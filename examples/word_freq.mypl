@@ -1,0 +1,30 @@
+# Real-World Example
+
+# print out frequencies once found
+void print_freq(string s) {
+  dict string int wordFreq = new dict{string, int}
+
+  # parse word frequencies 
+  for (int i = 0; i < length(s); i = i + 1) {
+    char c = get(i, s)
+    string word = ""
+    if (c != ' ') {
+      word = concat(word, to_string(c))
+      wordFreq[word] = wordFreq[word] + 1
+    }
+  }
+
+  # iterate over words stored in dictionary
+  for (int j = 0; j < length(keys(wordFreq)); j = j + 1) {
+    string word = keys(wordFreq[i])
+    int freq = values(wordFreq[i])
+    print(concat(concat(word, " "), to_string(freq)))
+    print("\n")
+  }
+}
+
+void main() {
+  string word = "this is a string of words with spaces"
+
+  print_freq(word)
+}

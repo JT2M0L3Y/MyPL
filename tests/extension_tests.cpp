@@ -99,16 +99,19 @@ TEST(LexerTests, AllocationWords)
   ASSERT_EQ("dict", t.lexeme());
   ASSERT_EQ(1, t.line());
   ASSERT_EQ(5, t.column());
+  lexer.next_token();
   t = lexer.next_token();
   ASSERT_EQ(TokenType::STRING_TYPE, t.type());
   ASSERT_EQ("string", t.lexeme());
   ASSERT_EQ(1, t.line());
   ASSERT_EQ(10, t.column());
+  lexer.next_token();
   t = lexer.next_token();
   ASSERT_EQ(TokenType::INT_TYPE, t.type());
   ASSERT_EQ("int", t.lexeme());
   ASSERT_EQ(1, t.line());
   ASSERT_EQ(18, t.column());
+  lexer.next_token();
   t = lexer.next_token();
   ASSERT_EQ(TokenType::EOS, t.type());
 }
@@ -117,11 +120,12 @@ TEST(LexerTests, AllocationWords)
 // Simple Parser Tests
 //----------------------------------------------------------------------
 
-/*
 TEST(SimpleParserTests, SimpleCreation)
 {
   stringstream in(build_string({
-      "dict string bool kvs = new dict{string, bool}"
+      "void main() {",
+      "  dict string bool kvs = new dict{string, bool}",
+      "}"
     }));
   SimpleParser(Lexer(in)).parse();
 }
@@ -129,7 +133,9 @@ TEST(SimpleParserTests, SimpleCreation)
 TEST(SimpleParserTests, SimpleInsert)
 {
   stringstream in(build_string({
-      "kvs[\"foo\"] = true"
+      "void main() {",
+      "  kvs[\"foo\"] = true",
+      "}"
     }));
   SimpleParser(Lexer(in)).parse();
 }
@@ -137,11 +143,12 @@ TEST(SimpleParserTests, SimpleInsert)
 TEST(SimpleParserTests, SimpleAccess)
 {
   stringstream in(build_string({
-      "bool x = kvs[\"foo\"]"
+      "void main() {",
+      "  bool x = kvs[\"foo\"]",
+      "}"
     }));
   SimpleParser(Lexer(in)).parse();
 }
-*/
 
 //----------------------------------------------------------------------
 // AST Parser Tests
@@ -205,11 +212,6 @@ TEST(ParserSyntaxTests, ParseDictCreation)
       "  dict string bool kv3 = new dict{string, bool}",
       "  dict string char kv4 = new dict{string, char}",
       "  dict string double kv5 = new dict{string, double}",
-      "  dict int string kv6 = new dict{int, string}",
-      "  dict int int kv7 = new dict{int, int}",
-      "  dict int bool kv8 = new dict{int, bool}",
-      "  dict int char kv9 = new dict{int, char}",
-      "  dict int double kv10 = new dict{int, double}",
       "}"
     }));
   ASTParser(Lexer(in)).parse();
@@ -225,12 +227,6 @@ TEST(ParserSyntaxTests, ParseDictAssign)
       "  a[\"foo\"] = 5",
       "  a[\"foo\"] = 'a'",
       "  a[\"foo\"] = null",
-      "  a[4] = false",
-      "  a[4] = \"foo\"",
-      "  a[4] = 1.25",
-      "  a[4] = 17",
-      "  a[4] = 'z'",
-      "  a[4] = null",
       "}"
     }));
   ASTParser(Lexer(in)).parse();
@@ -245,11 +241,6 @@ TEST(ParserSyntaxTests, ParseDictValue)
       "  bool x = a[\"foo\"]",
       "  char x = a[\"foo\"]",
       "  double x = a[\"foo\"]",
-      "  int x = a[4]",
-      "  string x =a[4]",
-      "  bool x = a[4]",
-      "  char x = a[4]",
-      "  double x = a[4]",
       "}"
     }));
   ASTParser(Lexer(in)).parse();
@@ -259,12 +250,11 @@ TEST(ParserSyntaxTests, ParseDictValue)
 // Semantic Checker Tests
 //----------------------------------------------------------------------
 
-/*
 TEST(SemanticCheckerTests, StaticDictCreation)
 {
   stringstream in(build_string({
       "void main() {",
-      "  dict int string kvs = new dict{int, string}",
+      "  dict string int kvs = new dict{string, int}",
       "}"
     }));
   SemanticChecker checker;
@@ -301,7 +291,6 @@ TEST(SemanticCheckerTests, StaticLoopDictBuiltIns)
   SemanticChecker checker;
   ASTParser(Lexer(in)).parse().accept(checker);
 }
-*/
 
 //----------------------------------------------------------------------
 // VM Tests

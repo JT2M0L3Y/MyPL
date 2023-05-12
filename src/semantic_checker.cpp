@@ -307,8 +307,8 @@ void SemanticChecker::visit(AssignStmt &s)
   DataType rhs_type = curr_type;
 
   // check if types match
-  if (lhs_type.type_names[0] != rhs_type.type_names[0] && rhs_type.type_names[0] != "void")
-    error("types '" + lhs_type.type_names[0] + "' and '" + rhs_type.type_names[0] +
+  if (lhs_type.type_names[1] != rhs_type.type_names[0] && rhs_type.type_names[0] != "void")
+    error("types '" + lhs_type.type_names[1] + "' and '" + rhs_type.type_names[0] +
               "' do not match", s.expr.first_token());
 }
 
@@ -490,6 +490,14 @@ void SemanticChecker::visit(Expr &e)
               "' and '" + rest.type_names[0] + "'", e.first->first_token());
       curr_type = first;
     }
+    // dictionary declaration rvalue
+    else if (operation.type() == TokenType::COMMA)
+    {
+      if (!BASE_TYPES.contains(first.type_names[0]) || !BASE_TYPES.contains(rest.type_names[0]))
+        error("invalid types used in dictionary declaration", e.first->first_token());
+
+      curr_type = DataType{false, true, {first.type_names[0], rest.type_names[0]}};
+    }
     // logical operators
     else
     {
@@ -549,17 +557,16 @@ void SemanticChecker::visit(NewRValue &v)
   else if (v.dict_expr.has_value())
   {
     std::vector<std::string> types;
-    string type = v.dict_expr.value()[0].first_token().lexeme();
+    v.dict_expr->first->accept(*this);
+    DataType type = curr_type;
 
-    if (type != "string" && type != "int")
-      error("key type '" + type + "' not defined", v.type);
-    types.push_back(type);
+    if (type.type_names[0] != "string" && type.type_names[0] != "int")
+      error("key type '" + type.type_names[0] + "' not defined", v.type);
+    types.push_back(type.type_names[0]);
 
-    type = v.dict_expr.value()[1].first_token().lexeme();
-
-    if (!BASE_TYPES.contains(type) && !struct_defs.contains(type))
-      error("value type '" + type + "' not defined", v.type);
-    types.push_back(type);
+    if (!BASE_TYPES.contains(type.type_names[1]) && !struct_defs.contains(type.type_names[1]))
+      error("value type '" + type.type_names[1] + "' not defined", v.type);
+    types.push_back(type.type_names[1]);
 
     curr_type = DataType{false, true, types};
   }

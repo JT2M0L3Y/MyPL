@@ -200,14 +200,13 @@ void ASTParser::data_type(VarDef& v)
     v.data_type.is_dict = true;
     eat(TokenType::DICT, "expecting 'dict'");
     // parse key type
-    if (match({TokenType::ID, TokenType::STRING_TYPE, 
-              TokenType::INT_TYPE, TokenType::CHAR_TYPE}))
+    if (match(TokenType::STRING_TYPE))
     {
       v.data_type.type_names.push_back(curr_token.lexeme());
       eat(curr_token.type(), "expecting type for key");
     }
     // parse value type
-    if (base_type() || match({TokenType::ID, TokenType::ARRAY}))
+    if (base_type())
     {
       v.data_type.type_names.push_back(curr_token.lexeme());
       eat(curr_token.type(), "expecting type for value");
@@ -279,7 +278,10 @@ void ASTParser::stmt(std::vector<std::shared_ptr<Stmt>>& s)
         Expr e;
         expr(e);
         VarRef v;
-        v.array_expr = e;
+        if (e.first->first_token().type() == TokenType::STRING_VAL)
+          v.dict_expr = e;
+        else
+          v.array_expr = e;
         v.var_name = id_token;
         aStmt.lvalue.push_back(v);
         eat(TokenType::RBRACKET, "expecting ']'");
@@ -516,7 +518,7 @@ void ASTParser::expr(Expr& e)
   else
     error("expecting expression start");
 
-  if (bin_op())
+  if (bin_op() || match(TokenType::COMMA))
   {
     e.op = curr_token;
     advance();
@@ -589,14 +591,9 @@ void ASTParser::new_rvalue(NewRValue& nRVal)
     nRVal.type = curr_token;
     advance();
     eat(TokenType::LBRACE, "expecting '{'");
-    std::vector<Expr> types;
     Expr e;
     expr(e);
-    types.push_back(e);
-    eat(TokenType::COMMA, "expecting ','");
-    expr(e);
-    types.push_back(e);
-    nRVal.dict_expr = make_optional<std::vector<Expr>>(types);
+    nRVal.dict_expr = make_optional<Expr>(e);
     eat(TokenType::RBRACE, "expecting '}'");
   }
   else
@@ -640,7 +637,10 @@ void ASTParser::var_rvalue(VarRValue& vRVal)
       advance();
       Expr e;
       expr(e);
-      vRVal.path.back().array_expr = make_optional<Expr>(e);
+      if (e.first->first_token().type() == TokenType::STRING_VAL)
+        vRVal.path.back().dict_expr = make_optional<Expr>(e);
+      else
+        vRVal.path.back().array_expr = make_optional<Expr>(e);
       eat(TokenType::RBRACKET, "expecting ']'");
     }
   }

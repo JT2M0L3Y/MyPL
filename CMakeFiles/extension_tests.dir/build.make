@@ -125,10 +125,24 @@ CMakeFiles/extension_tests.dir/src/lexer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/extension_tests.dir/src/lexer.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/src/lexer.cpp" -o CMakeFiles/extension_tests.dir/src/lexer.cpp.s
 
+CMakeFiles/extension_tests.dir/src/simple_parser.cpp.o: CMakeFiles/extension_tests.dir/flags.make
+CMakeFiles/extension_tests.dir/src/simple_parser.cpp.o: src/simple_parser.cpp
+CMakeFiles/extension_tests.dir/src/simple_parser.cpp.o: CMakeFiles/extension_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/extension_tests.dir/src/simple_parser.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/extension_tests.dir/src/simple_parser.cpp.o -MF CMakeFiles/extension_tests.dir/src/simple_parser.cpp.o.d -o CMakeFiles/extension_tests.dir/src/simple_parser.cpp.o -c "/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/src/simple_parser.cpp"
+
+CMakeFiles/extension_tests.dir/src/simple_parser.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/extension_tests.dir/src/simple_parser.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/src/simple_parser.cpp" > CMakeFiles/extension_tests.dir/src/simple_parser.cpp.i
+
+CMakeFiles/extension_tests.dir/src/simple_parser.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/extension_tests.dir/src/simple_parser.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/src/simple_parser.cpp" -o CMakeFiles/extension_tests.dir/src/simple_parser.cpp.s
+
 CMakeFiles/extension_tests.dir/src/ast_parser.cpp.o: CMakeFiles/extension_tests.dir/flags.make
 CMakeFiles/extension_tests.dir/src/ast_parser.cpp.o: src/ast_parser.cpp
 CMakeFiles/extension_tests.dir/src/ast_parser.cpp.o: CMakeFiles/extension_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/extension_tests.dir/src/ast_parser.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/extension_tests.dir/src/ast_parser.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/extension_tests.dir/src/ast_parser.cpp.o -MF CMakeFiles/extension_tests.dir/src/ast_parser.cpp.o.d -o CMakeFiles/extension_tests.dir/src/ast_parser.cpp.o -c "/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/src/ast_parser.cpp"
 
 CMakeFiles/extension_tests.dir/src/ast_parser.cpp.i: cmake_force
@@ -139,10 +153,52 @@ CMakeFiles/extension_tests.dir/src/ast_parser.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/extension_tests.dir/src/ast_parser.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/src/ast_parser.cpp" -o CMakeFiles/extension_tests.dir/src/ast_parser.cpp.s
 
+CMakeFiles/extension_tests.dir/src/print_visitor.cpp.o: CMakeFiles/extension_tests.dir/flags.make
+CMakeFiles/extension_tests.dir/src/print_visitor.cpp.o: src/print_visitor.cpp
+CMakeFiles/extension_tests.dir/src/print_visitor.cpp.o: CMakeFiles/extension_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/extension_tests.dir/src/print_visitor.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/extension_tests.dir/src/print_visitor.cpp.o -MF CMakeFiles/extension_tests.dir/src/print_visitor.cpp.o.d -o CMakeFiles/extension_tests.dir/src/print_visitor.cpp.o -c "/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/src/print_visitor.cpp"
+
+CMakeFiles/extension_tests.dir/src/print_visitor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/extension_tests.dir/src/print_visitor.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/src/print_visitor.cpp" > CMakeFiles/extension_tests.dir/src/print_visitor.cpp.i
+
+CMakeFiles/extension_tests.dir/src/print_visitor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/extension_tests.dir/src/print_visitor.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/src/print_visitor.cpp" -o CMakeFiles/extension_tests.dir/src/print_visitor.cpp.s
+
+CMakeFiles/extension_tests.dir/src/symbol_table.cpp.o: CMakeFiles/extension_tests.dir/flags.make
+CMakeFiles/extension_tests.dir/src/symbol_table.cpp.o: src/symbol_table.cpp
+CMakeFiles/extension_tests.dir/src/symbol_table.cpp.o: CMakeFiles/extension_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/extension_tests.dir/src/symbol_table.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/extension_tests.dir/src/symbol_table.cpp.o -MF CMakeFiles/extension_tests.dir/src/symbol_table.cpp.o.d -o CMakeFiles/extension_tests.dir/src/symbol_table.cpp.o -c "/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/src/symbol_table.cpp"
+
+CMakeFiles/extension_tests.dir/src/symbol_table.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/extension_tests.dir/src/symbol_table.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/src/symbol_table.cpp" > CMakeFiles/extension_tests.dir/src/symbol_table.cpp.i
+
+CMakeFiles/extension_tests.dir/src/symbol_table.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/extension_tests.dir/src/symbol_table.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/src/symbol_table.cpp" -o CMakeFiles/extension_tests.dir/src/symbol_table.cpp.s
+
+CMakeFiles/extension_tests.dir/src/semantic_checker.cpp.o: CMakeFiles/extension_tests.dir/flags.make
+CMakeFiles/extension_tests.dir/src/semantic_checker.cpp.o: src/semantic_checker.cpp
+CMakeFiles/extension_tests.dir/src/semantic_checker.cpp.o: CMakeFiles/extension_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/extension_tests.dir/src/semantic_checker.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/extension_tests.dir/src/semantic_checker.cpp.o -MF CMakeFiles/extension_tests.dir/src/semantic_checker.cpp.o.d -o CMakeFiles/extension_tests.dir/src/semantic_checker.cpp.o -c "/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/src/semantic_checker.cpp"
+
+CMakeFiles/extension_tests.dir/src/semantic_checker.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/extension_tests.dir/src/semantic_checker.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/src/semantic_checker.cpp" > CMakeFiles/extension_tests.dir/src/semantic_checker.cpp.i
+
+CMakeFiles/extension_tests.dir/src/semantic_checker.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/extension_tests.dir/src/semantic_checker.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/src/semantic_checker.cpp" -o CMakeFiles/extension_tests.dir/src/semantic_checker.cpp.s
+
 CMakeFiles/extension_tests.dir/src/vm.cpp.o: CMakeFiles/extension_tests.dir/flags.make
 CMakeFiles/extension_tests.dir/src/vm.cpp.o: src/vm.cpp
 CMakeFiles/extension_tests.dir/src/vm.cpp.o: CMakeFiles/extension_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/extension_tests.dir/src/vm.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/extension_tests.dir/src/vm.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/extension_tests.dir/src/vm.cpp.o -MF CMakeFiles/extension_tests.dir/src/vm.cpp.o.d -o CMakeFiles/extension_tests.dir/src/vm.cpp.o -c "/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/src/vm.cpp"
 
 CMakeFiles/extension_tests.dir/src/vm.cpp.i: cmake_force
@@ -156,7 +212,7 @@ CMakeFiles/extension_tests.dir/src/vm.cpp.s: cmake_force
 CMakeFiles/extension_tests.dir/src/vm_instr.cpp.o: CMakeFiles/extension_tests.dir/flags.make
 CMakeFiles/extension_tests.dir/src/vm_instr.cpp.o: src/vm_instr.cpp
 CMakeFiles/extension_tests.dir/src/vm_instr.cpp.o: CMakeFiles/extension_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/extension_tests.dir/src/vm_instr.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/extension_tests.dir/src/vm_instr.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/extension_tests.dir/src/vm_instr.cpp.o -MF CMakeFiles/extension_tests.dir/src/vm_instr.cpp.o.d -o CMakeFiles/extension_tests.dir/src/vm_instr.cpp.o -c "/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/src/vm_instr.cpp"
 
 CMakeFiles/extension_tests.dir/src/vm_instr.cpp.i: cmake_force
@@ -170,7 +226,7 @@ CMakeFiles/extension_tests.dir/src/vm_instr.cpp.s: cmake_force
 CMakeFiles/extension_tests.dir/src/var_table.cpp.o: CMakeFiles/extension_tests.dir/flags.make
 CMakeFiles/extension_tests.dir/src/var_table.cpp.o: src/var_table.cpp
 CMakeFiles/extension_tests.dir/src/var_table.cpp.o: CMakeFiles/extension_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/extension_tests.dir/src/var_table.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/extension_tests.dir/src/var_table.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/extension_tests.dir/src/var_table.cpp.o -MF CMakeFiles/extension_tests.dir/src/var_table.cpp.o.d -o CMakeFiles/extension_tests.dir/src/var_table.cpp.o -c "/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/src/var_table.cpp"
 
 CMakeFiles/extension_tests.dir/src/var_table.cpp.i: cmake_force
@@ -184,7 +240,7 @@ CMakeFiles/extension_tests.dir/src/var_table.cpp.s: cmake_force
 CMakeFiles/extension_tests.dir/src/code_generator.cpp.o: CMakeFiles/extension_tests.dir/flags.make
 CMakeFiles/extension_tests.dir/src/code_generator.cpp.o: src/code_generator.cpp
 CMakeFiles/extension_tests.dir/src/code_generator.cpp.o: CMakeFiles/extension_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/extension_tests.dir/src/code_generator.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/extension_tests.dir/src/code_generator.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/extension_tests.dir/src/code_generator.cpp.o -MF CMakeFiles/extension_tests.dir/src/code_generator.cpp.o.d -o CMakeFiles/extension_tests.dir/src/code_generator.cpp.o -c "/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/src/code_generator.cpp"
 
 CMakeFiles/extension_tests.dir/src/code_generator.cpp.i: cmake_force
@@ -201,7 +257,11 @@ extension_tests_OBJECTS = \
 "CMakeFiles/extension_tests.dir/src/token.cpp.o" \
 "CMakeFiles/extension_tests.dir/src/mypl_exception.cpp.o" \
 "CMakeFiles/extension_tests.dir/src/lexer.cpp.o" \
+"CMakeFiles/extension_tests.dir/src/simple_parser.cpp.o" \
 "CMakeFiles/extension_tests.dir/src/ast_parser.cpp.o" \
+"CMakeFiles/extension_tests.dir/src/print_visitor.cpp.o" \
+"CMakeFiles/extension_tests.dir/src/symbol_table.cpp.o" \
+"CMakeFiles/extension_tests.dir/src/semantic_checker.cpp.o" \
 "CMakeFiles/extension_tests.dir/src/vm.cpp.o" \
 "CMakeFiles/extension_tests.dir/src/vm_instr.cpp.o" \
 "CMakeFiles/extension_tests.dir/src/var_table.cpp.o" \
@@ -214,7 +274,11 @@ extension_tests: CMakeFiles/extension_tests.dir/tests/extension_tests.cpp.o
 extension_tests: CMakeFiles/extension_tests.dir/src/token.cpp.o
 extension_tests: CMakeFiles/extension_tests.dir/src/mypl_exception.cpp.o
 extension_tests: CMakeFiles/extension_tests.dir/src/lexer.cpp.o
+extension_tests: CMakeFiles/extension_tests.dir/src/simple_parser.cpp.o
 extension_tests: CMakeFiles/extension_tests.dir/src/ast_parser.cpp.o
+extension_tests: CMakeFiles/extension_tests.dir/src/print_visitor.cpp.o
+extension_tests: CMakeFiles/extension_tests.dir/src/symbol_table.cpp.o
+extension_tests: CMakeFiles/extension_tests.dir/src/semantic_checker.cpp.o
 extension_tests: CMakeFiles/extension_tests.dir/src/vm.cpp.o
 extension_tests: CMakeFiles/extension_tests.dir/src/vm_instr.cpp.o
 extension_tests: CMakeFiles/extension_tests.dir/src/var_table.cpp.o
@@ -222,7 +286,7 @@ extension_tests: CMakeFiles/extension_tests.dir/src/code_generator.cpp.o
 extension_tests: CMakeFiles/extension_tests.dir/build.make
 extension_tests: /usr/lib/x86_64-linux-gnu/libgtest.a
 extension_tests: CMakeFiles/extension_tests.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable extension_tests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable extension_tests"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/extension_tests.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

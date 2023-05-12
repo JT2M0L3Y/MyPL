@@ -15,8 +15,10 @@ find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
 add_executable(extension_tests tests/extension_tests.cpp
-  src/token.cpp src/mypl_exception.cpp src/lexer.cpp src/ast_parser.cpp
-  src/vm.cpp src/vm_instr.cpp src/var_table.cpp src/code_generator)
+  src/token.cpp src/mypl_exception.cpp src/lexer.cpp src/simple_parser.cpp
+  src/ast_parser.cpp src/print_visitor.cpp src/symbol_table.cpp 
+  src/semantic_checker.cpp src/vm.cpp src/vm_instr.cpp src/var_table.cpp 
+  src/code_generator.cpp)
 target_link_libraries(extension_tests ${GTEST_LIBRARIES} pthread)
 
 # create mypl target

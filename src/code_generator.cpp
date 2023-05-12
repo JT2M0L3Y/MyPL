@@ -365,8 +365,11 @@ void CodeGenerator::visit(NewRValue& v)
   }
   else if (v.dict_expr.has_value()) {
     // initialize dict
-    for (auto e : *v.dict_expr)
-      e.accept(*this);
+    // for (auto e : *v.dict_expr)
+    //   e.accept(*this);
+    v.dict_expr->accept(*this);
+    // v.dict_expr->begin()->first.first->accept(*this);
+    // v.dict_expr->begin()->second.first->accept(*this);
     // curr_frame.instructions.push_back(VMInstr::PUSH());
     curr_frame.instructions.push_back(VMInstr::ALLOCD());
   }

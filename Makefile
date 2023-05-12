@@ -279,6 +279,7 @@ src/print_visitor.o: src/print_visitor.cpp.o
 
 # target to build an object file
 src/print_visitor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/print_visitor.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/print_visitor.cpp.o
 .PHONY : src/print_visitor.cpp.o
 
@@ -287,6 +288,7 @@ src/print_visitor.i: src/print_visitor.cpp.i
 
 # target to preprocess a source file
 src/print_visitor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/print_visitor.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/print_visitor.cpp.i
 .PHONY : src/print_visitor.cpp.i
 
@@ -295,6 +297,7 @@ src/print_visitor.s: src/print_visitor.cpp.s
 
 # target to generate assembly for a file
 src/print_visitor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/print_visitor.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/print_visitor.cpp.s
 .PHONY : src/print_visitor.cpp.s
 
@@ -303,6 +306,7 @@ src/semantic_checker.o: src/semantic_checker.cpp.o
 
 # target to build an object file
 src/semantic_checker.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/semantic_checker.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/semantic_checker.cpp.o
 .PHONY : src/semantic_checker.cpp.o
 
@@ -311,6 +315,7 @@ src/semantic_checker.i: src/semantic_checker.cpp.i
 
 # target to preprocess a source file
 src/semantic_checker.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/semantic_checker.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/semantic_checker.cpp.i
 .PHONY : src/semantic_checker.cpp.i
 
@@ -319,6 +324,7 @@ src/semantic_checker.s: src/semantic_checker.cpp.s
 
 # target to generate assembly for a file
 src/semantic_checker.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/semantic_checker.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/semantic_checker.cpp.s
 .PHONY : src/semantic_checker.cpp.s
 
@@ -327,6 +333,7 @@ src/simple_parser.o: src/simple_parser.cpp.o
 
 # target to build an object file
 src/simple_parser.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/simple_parser.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/simple_parser.cpp.o
 .PHONY : src/simple_parser.cpp.o
 
@@ -335,6 +342,7 @@ src/simple_parser.i: src/simple_parser.cpp.i
 
 # target to preprocess a source file
 src/simple_parser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/simple_parser.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/simple_parser.cpp.i
 .PHONY : src/simple_parser.cpp.i
 
@@ -343,6 +351,7 @@ src/simple_parser.s: src/simple_parser.cpp.s
 
 # target to generate assembly for a file
 src/simple_parser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/simple_parser.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/simple_parser.cpp.s
 .PHONY : src/simple_parser.cpp.s
 
@@ -351,6 +360,7 @@ src/symbol_table.o: src/symbol_table.cpp.o
 
 # target to build an object file
 src/symbol_table.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/symbol_table.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/symbol_table.cpp.o
 .PHONY : src/symbol_table.cpp.o
 
@@ -359,6 +369,7 @@ src/symbol_table.i: src/symbol_table.cpp.i
 
 # target to preprocess a source file
 src/symbol_table.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/symbol_table.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/symbol_table.cpp.i
 .PHONY : src/symbol_table.cpp.i
 
@@ -367,6 +378,7 @@ src/symbol_table.s: src/symbol_table.cpp.s
 
 # target to generate assembly for a file
 src/symbol_table.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/extension_tests.dir/build.make CMakeFiles/extension_tests.dir/src/symbol_table.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mypl.dir/build.make CMakeFiles/mypl.dir/src/symbol_table.cpp.s
 .PHONY : src/symbol_table.cpp.s
 
