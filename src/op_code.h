@@ -53,15 +53,21 @@ enum class OpCode {
   TODBL,        // pop x, push x as a double
   TOSTR,        // pop x, push x as string
   CONCAT,       // pop x, pop y, push y + x (string concat)
+  KEYS,         // pop x, push [obj(x).keys]
+  VALUES,       // pop x, push [obj(x).values]
     
   // heap
   ALLOCS,       // allocate struct obj, push oid x
   ALLOCA,       // pop x, pop y, allocate array obj with y x values, push oid
+  ALLOCD,       // pop x, pop y, allocate dict obj with y-type keys and x-type values, push oid
   ADDF,         // [operand] pop x, add field named v to obj(x)
   SETF,         // [operand] pop x and y, set obj(y).v = x
   GETF,         // [operand] pop x, push value of obj(x).v 
   SETI,         // pop x, y, and z, set array obj(z)[y] = x
   GETI,         // pop x and y, push array obj(y)[x] value
+  ADDKV,        // pop x, y, and z, add {y, x} to obj(x)
+  GETV,         // [operand], pop x, push value of obj(x)[v]
+  SETV,         // [operand] pop x, y, set obj(y)[v] = x
     
   // special
   DUP,          // pop x, push x, push x

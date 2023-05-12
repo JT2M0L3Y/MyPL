@@ -1,7 +1,7 @@
 //----------------------------------------------------------------------
 // FILE: vm_instr.h
 // DATE: CPSC 326, Spring 2023
-// AUTH: S. Bowers
+// AUTH: Jonathan Smoley
 // DESC: MyPL VM instructions
 //----------------------------------------------------------------------
 
@@ -57,13 +57,19 @@ public:
   static VMInstr TODBL();  
   static VMInstr TOSTR();
   static VMInstr CONCAT();
+  static VMInstr KEYS();
+  static VMInstr VALUES();
   static VMInstr ALLOCS();
   static VMInstr ALLOCA();
-  static VMInstr ADDF(const std::string& field);
+  static VMInstr ALLOCD();
+  static VMInstr ADDF(const std::string &field);
   static VMInstr SETF(const std::string& field);
   static VMInstr GETF(const std::string& field);
   static VMInstr SETI();
-  static VMInstr GETI();  
+  static VMInstr GETI();
+  static VMInstr ADDKV();
+  static VMInstr GETV();
+  static VMInstr SETV();
   static VMInstr DUP();
   static VMInstr NOP();
 

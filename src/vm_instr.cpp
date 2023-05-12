@@ -231,6 +231,15 @@ VMInstr VMInstr::CONCAT()
   return VMInstr(OpCode::CONCAT);  
 }
 
+VMInstr VMInstr::KEYS()
+{
+  return VMInstr(OpCode::KEYS);
+}
+
+VMInstr VMInstr::VALUES()
+{
+  return VMInstr(OpCode::VALUES);
+}
 
 VMInstr VMInstr::ALLOCS()
 {
@@ -243,6 +252,10 @@ VMInstr VMInstr::ALLOCA()
   return VMInstr(OpCode::ALLOCA);    
 }
 
+VMInstr VMInstr::ALLOCD()
+{
+  return VMInstr(OpCode::ALLOCD);
+}
 
 VMInstr VMInstr::ADDF(const string& field)
 {
@@ -273,6 +286,20 @@ VMInstr VMInstr::GETI()
   return VMInstr(OpCode::GETI);      
 }  
 
+VMInstr VMInstr::ADDKV()
+{
+  return VMInstr(OpCode::ADDKV);
+}
+
+VMInstr VMInstr::GETV()
+{
+  return VMInstr(OpCode::GETV);
+}
+
+VMInstr VMInstr::SETV()
+{
+  return VMInstr(OpCode::SETV);
+}
 
 VMInstr VMInstr::DUP()
 {

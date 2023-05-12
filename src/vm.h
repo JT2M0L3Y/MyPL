@@ -39,6 +39,9 @@ private:
   // heap for array objects
   std::unordered_map<int, std::vector<VMValue>> array_heap;
 
+  // heap for dict objects
+  std::unordered_map<int, std::unordered_map<VMValue, VMValue>> dict_heap;
+
   // next available object id 
   int next_obj_id = 2023;
 

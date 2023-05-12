@@ -15,7 +15,8 @@ using namespace std;
 // hash table of names of the base data types and built-in functions
 const unordered_set<string> BASE_TYPES{"int", "double", "char", "string", "bool"};
 const unordered_set<string> BUILT_INS{"print", "input", "to_string", "to_int",
-                                      "to_double", "length", "get", "concat"};
+                                      "to_double", "length", "get", "concat",
+                                      "keys", "values"};
 
 // helper functions
 
@@ -407,6 +408,26 @@ void SemanticChecker::visit(CallExpr &e)
       if (curr_type.type_names[0] != "string")
         error("concat expects string", e.fun_name);
       curr_type = DataType{false, false, {"string"}};
+    }
+    else if (fname == "keys")
+    {
+      // check arg count
+      if (e.args.size() != 1)
+        error("keys expects 1 argument", e.fun_name);
+      e.args[0].accept(*this);
+      if (!curr_type.is_dict)
+        error("keys only operates on dictionaries", e.fun_name);
+      curr_type = DataType{true, false, {curr_type.type_names[0]}};
+    }
+    else if (fname == "values")
+    {
+      // check arg count
+      if (e.args.size() != 1)
+        error("values expects 1 argument", e.fun_name);
+      e.args[0].accept(*this);
+      if (!curr_type.is_dict)
+        error("values only operates on dictionaries", e.fun_name);
+      curr_type = DataType{true, false, {curr_type.type_names[1]}};
     }
   }
   else

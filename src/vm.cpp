@@ -6,6 +6,7 @@
 //----------------------------------------------------------------------
 
 #include <iostream>
+#include <unordered_map>
 #include "vm.h"
 #include "mypl_exception.h"
 
@@ -421,6 +422,34 @@ void VM::run(bool DEBUG)
       // push y + x as string
       frame->operand_stack.push(get<string>(y) + get<string>(x));
     }
+    else if (instr.opcode() == OpCode::KEYS) {
+      // pop x
+      VMValue x = frame->operand_stack.top();
+      ensure_not_null(*frame, x);
+      frame->operand_stack.pop();
+      // push obj([obj(x).keys]) (i.e., array oid for keys array)
+      std::unordered_map<VMValue, VMValue> d = dict_heap[get<int>(x)];
+      std::vector<VMValue> ks;
+      for (auto p : d)
+        ks.push_back(p.first);
+      array_heap[next_obj_id] = ks;
+      frame->operand_stack.push(next_obj_id);
+      ++next_obj_id;
+    }
+    else if (instr.opcode() == OpCode::VALUES) {
+      // pop x
+      VMValue x = frame->operand_stack.top();
+      ensure_not_null(*frame, x);
+      frame->operand_stack.pop();
+      // push obj([obj(x).values]) (i.e., array oid for values array)
+      std::unordered_map<VMValue, VMValue> d = dict_heap[get<int>(x)];
+      std::vector<VMValue> ks;
+      for (auto p : d)
+        ks.push_back(p.second);
+      array_heap[next_obj_id] = ks;
+      frame->operand_stack.push(next_obj_id);
+      ++next_obj_id;
+    }
 
     //----------------------------------------------------------------------
     // heap
@@ -444,6 +473,25 @@ void VM::run(bool DEBUG)
       array_heap[next_obj_id] = vector<VMValue>(y, x);
       // push oid z
       frame->operand_stack.push(next_obj_id);
+      ++next_obj_id;
+    }
+    else if (instr.opcode() == OpCode::ALLOCD) {
+      // pop x and y
+      VMValue x = frame->operand_stack.top();
+      frame->operand_stack.pop();
+      VMValue y = frame->operand_stack.top();
+      frame->operand_stack.pop();
+      // allocate dict in heap with y-type keys and x-type values
+      // if (get<string>(y) == "string" && get<string>(x) == "string")
+      // {
+      //   std::unordered_map<string, string> new_dict;
+      //   dict_heap[next_obj_id] = new_dict;
+      // }
+      // else if (get<string>(y) == "string" && get<string>(x) == "int")
+      // {
+        
+      // }
+      // dict_heap[next_obj_id] = {nullptr, nullptr};
       ++next_obj_id;
     }
     else if (instr.opcode() == OpCode::ADDF) {
@@ -500,6 +548,35 @@ void VM::run(bool DEBUG)
         error("out-of-bounds array index", *frame);
       // push array obj(y)[x] value onto operand stack
       frame->operand_stack.push(array_heap[get<int>(y)][get<int>(x)]);
+    }
+    else if (instr.opcode() == OpCode::ADDKV) {
+      // pop x
+      VMValue x = frame->operand_stack.top();
+      frame->operand_stack.pop();
+      // pop y
+      VMValue y = frame->operand_stack.top();
+      frame->operand_stack.pop();
+      // pop z
+      VMValue z = frame->operand_stack.top();
+      ensure_not_null(*frame, z);
+      frame->operand_stack.pop();
+      // add kv pair to obj(z)
+      dict_heap[get<int>(z)].insert({y, x});
+    }
+    else if (instr.opcode() == OpCode::SETV) {
+      // pop x
+      VMValue x = frame->operand_stack.top();
+      frame->operand_stack.pop();
+      // pop y
+      VMValue y = frame->operand_stack.top();
+      frame->operand_stack.pop();
+      dict_heap[get<int>(y)][instr.operand().value()] = x;
+    }
+    else if (instr.opcode() == OpCode::GETV) {
+      // pop x
+      VMValue x = frame->operand_stack.top();
+      frame->operand_stack.pop();
+      frame->operand_stack.push(dict_heap[get<int>(x)][instr.operand().value()]);
     }
 
     //----------------------------------------------------------------------

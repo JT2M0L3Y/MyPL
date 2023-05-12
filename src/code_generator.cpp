@@ -253,8 +253,11 @@ void CodeGenerator::visit(CallExpr& e)
     curr_frame.instructions.push_back(VMInstr::GETC());
   else if (name == "concat")
     curr_frame.instructions.push_back(VMInstr::CONCAT());
-  else
-    curr_frame.instructions.push_back(VMInstr::CALL(name));
+  else if (name == "keys")
+    curr_frame.instructions.push_back(VMInstr::KEYS());
+  else if (name == "values")
+    curr_frame.instructions.push_back(VMInstr::VALUES());
+  else curr_frame.instructions.push_back(VMInstr::CALL(name));
 }
 
 
@@ -359,6 +362,13 @@ void CodeGenerator::visit(NewRValue& v)
     v.array_expr->accept(*this);
     curr_frame.instructions.push_back(VMInstr::PUSH(nullptr));
     curr_frame.instructions.push_back(VMInstr::ALLOCA());
+  }
+  else if (v.dict_expr.has_value()) {
+    // initialize dict
+    for (auto e : *v.dict_expr)
+      e.accept(*this);
+    // curr_frame.instructions.push_back(VMInstr::PUSH());
+    curr_frame.instructions.push_back(VMInstr::ALLOCD());
   }
   else {
     curr_frame.instructions.push_back(VMInstr::ALLOCS());

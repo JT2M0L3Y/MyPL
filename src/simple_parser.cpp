@@ -77,7 +77,7 @@ void SimpleParser::struct_def()
 
 void SimpleParser::fields()
 {
-  if (base_type() || match(TokenType::ID) || match(TokenType::ARRAY))
+  if (base_type() || match({TokenType::ID, TokenType::ARRAY, TokenType::DICT}))
   {
     data_type();
     eat(TokenType::ID, "expecting identifier");
@@ -370,7 +370,6 @@ void SimpleParser::new_rvalue()
       eat(TokenType::RBRACKET, "expecting ']'");
     }
   }
-  //! new dict rvalue decl
   else if (match(TokenType::DICT))
   {
     advance();
