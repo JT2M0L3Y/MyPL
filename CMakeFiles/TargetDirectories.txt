@@ -1,4 +1,0 @@
-/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/CMakeFiles/extension_tests.dir
-/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/CMakeFiles/mypl.dir
-/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/CMakeFiles/edit_cache.dir
-/mnt/c/Users/jtsmo/OneDrive - Gonzaga University/junior/spring/opl/project-JT2M0L3Y/CMakeFiles/rebuild_cache.dir

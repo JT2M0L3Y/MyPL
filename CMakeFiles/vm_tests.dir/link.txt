@@ -1,1 +1,0 @@
-/usr/bin/c++ -O0 -g CMakeFiles/vm_tests.dir/tests/vm_tests.cpp.o CMakeFiles/vm_tests.dir/src/mypl_exception.cpp.o CMakeFiles/vm_tests.dir/src/vm_instr.cpp.o CMakeFiles/vm_tests.dir/src/vm.cpp.o -o vm_tests  /usr/lib/x86_64-linux-gnu/libgtest.a -lpthread 

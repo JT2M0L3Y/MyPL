@@ -1,1 +1,0 @@
-/usr/bin/c++ -O0 -g CMakeFiles/lexer_tests.dir/tests/lexer_tests.cpp.o CMakeFiles/lexer_tests.dir/src/token.cpp.o CMakeFiles/lexer_tests.dir/src/mypl_exception.cpp.o CMakeFiles/lexer_tests.dir/src/lexer.cpp.o -o lexer_tests  /usr/lib/x86_64-linux-gnu/libgtest.a -lpthread 
