@@ -1,7 +1,7 @@
 # README
 
 <a name="title"></a>
-## MyPL - Compiled Programming Language
+## MyPL - Programming Language Interpreter
 
 <a name="desc"></a>
 ### Description
