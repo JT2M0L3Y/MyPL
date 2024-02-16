@@ -31,18 +31,16 @@ make
 
 To run:
 ```
-./mypl --[flag] [file]
+./mypl [flag] [file]
 ```
 
-Available flags:
-```
---lex
---parse
---print
---check
---ir
---help
-```
+Available flags:  
+`--lex`: lexical analysis  
+`--parse`: parsing, AST generation  
+`--print`: pretty printer  
+`--check`: semantic checking  
+`--ir`: machine instruction generation  
+`--help`: usage message  
 
 Features:
 - lexical analysis
