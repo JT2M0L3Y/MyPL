@@ -14,18 +14,18 @@ Lexer::Lexer(istream &input_stream)
 {
 }
 
-char Lexer::read()
+int Lexer::read()
 {
   ++column;
   return input.get();
 }
 
-char Lexer::peek()
+int Lexer::peek()
 {
   return input.peek();
 }
 
-bool Lexer::match(char c, char lexeme)
+bool Lexer::match(int c, int lexeme)
 {
   return c == lexeme;
 }
@@ -38,10 +38,10 @@ void Lexer::error(const string &msg, int line, int column) const
 
 Token Lexer::next_token()
 {
-  char ch = read();
+  int ch = read();
 
   // check newline
-  while (match(ch, '\n'))
+  while (ch == '\n')
   {
     ch = read();
     ++line;
@@ -51,11 +51,11 @@ Token Lexer::next_token()
   // read all whitespace
   if (isspace(ch))
   {
-    while (isspace(ch) || match(ch, '\n'))
+    while (isspace(ch) || ch == '\n')
     {
       ch = read();
       // check newline
-      if (match(ch, '\n'))
+      if (ch == '\n')
       {
         ++line;
         column = 1;
@@ -64,24 +64,24 @@ Token Lexer::next_token()
   }
 
   // read comments
-  if (match(ch, '#'))
+  if (ch == '#')
   {
-    while (match(ch, '#'))
+    while (ch == '#')
     {
-      while (!match(ch, '\n') && !match(ch, EOF))
+      while (ch != '\n' && ch != EOF)
         ch = read();
       // check end of file
-      if (match(ch, EOF))
+      if (ch == EOF)
         return Token(TokenType::EOS, "end-of-stream", line, column);
       ch = read();
       column = 1;
       ++line;
       if (isspace(ch))
       {
-        while (isspace(ch) || match(ch, '\n'))
+        while (isspace(ch) || ch == '\n')
         {
           // check newline
-          if (match(ch, '\n'))
+          if (ch == '\n')
           {
             ++line;
             column = 0;
@@ -93,7 +93,7 @@ Token Lexer::next_token()
   }
 
   // check for EOF
-  if (match(ch, EOF))
+  if (ch == EOF)
     return Token(TokenType::EOS, "end-of-stream", line, column);
 
   // check for single character tokens (arithmetic, punctuation, etc.)

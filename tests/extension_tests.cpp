@@ -122,31 +122,25 @@ TEST(LexerTests, AllocationWords)
 
 TEST(SimpleParserTests, SimpleCreation)
 {
-  stringstream in(build_string({
-      "void main() {",
-      "  dict string bool kvs = new dict{string, bool}",
-      "}"
-    }));
+  stringstream in(build_string({"void main() {",
+                                "  dict string bool kvs = new dict{string, bool}",
+                                "}"}));
   SimpleParser(Lexer(in)).parse();
 }
 
 TEST(SimpleParserTests, SimpleInsert)
 {
-  stringstream in(build_string({
-      "void main() {",
-      "  kvs[\"foo\"] = true",
-      "}"
-    }));
+  stringstream in(build_string({"void main() {",
+                                "  kvs[\"foo\"] = true",
+                                "}"}));
   SimpleParser(Lexer(in)).parse();
 }
 
 TEST(SimpleParserTests, SimpleAccess)
 {
-  stringstream in(build_string({
-      "void main() {",
-      "  bool x = kvs[\"foo\"]",
-      "}"
-    }));
+  stringstream in(build_string({"void main() {",
+                                "  bool x = kvs[\"foo\"]",
+                                "}"}));
   SimpleParser(Lexer(in)).parse();
 }
 
@@ -156,11 +150,9 @@ TEST(SimpleParserTests, SimpleAccess)
 
 TEST(ASTParserTests, ASTDictVarDecl)
 {
-  stringstream in(build_string({
-        "void main() {",
-        "  dict string char kvs = new dict{string, char}",
-        "}"
-      }));
+  stringstream in(build_string({"void main() {",
+                                "  dict string char kvs = new dict{string, char}",
+                                "}"}));
   Program p = ASTParser(Lexer(in)).parse();
   ASSERT_EQ(1, p.fun_defs[0].stmts.size());
   VarDeclStmt &s = (VarDeclStmt &)*p.fun_defs[0].stmts[0];
@@ -172,11 +164,9 @@ TEST(ASTParserTests, ASTDictVarDecl)
 
 TEST(ASTParserTests, ASTDictAssignment)
 {
-  stringstream in(build_string({
-      "void main() {",
-      "  kvs[\"foo\"] = true",
-      "}"
-    }));
+  stringstream in(build_string({"void main() {",
+                                "  kvs[\"foo\"] = true",
+                                "}"}));
   Program p = ASTParser(Lexer(in)).parse();
   AssignStmt &s = (AssignStmt &)*p.fun_defs[0].stmts[0];
   ASSERT_EQ(1, s.lvalue.size());
@@ -186,11 +176,9 @@ TEST(ASTParserTests, ASTDictAssignment)
 
 TEST(ASTParserTests, ASTDictValue)
 {
-  stringstream in(build_string({
-      "void main() {",
-      "  x = kvs[\"foo\"]",
-      "}"
-    }));
+  stringstream in(build_string({"void main() {",
+                                "  x = kvs[\"foo\"]",
+                                "}"}));
   Program p = ASTParser(Lexer(in)).parse();
   Expr &e = ((AssignStmt &)*p.fun_defs[0].stmts[0]).expr;
   VarRValue &v = (VarRValue &)*((SimpleTerm &)*e.first).rvalue;
@@ -205,44 +193,38 @@ TEST(ASTParserTests, ASTDictValue)
 
 TEST(ParserSyntaxTests, ParseDictCreation)
 {
-  stringstream in(build_string({
-      "void my_fun() {",
-      "  dict string string kv1 = new dict{string, string}",
-      "  dict string int kv2 = new dict{string, int}",
-      "  dict string bool kv3 = new dict{string, bool}",
-      "  dict string char kv4 = new dict{string, char}",
-      "  dict string double kv5 = new dict{string, double}",
-      "}"
-    }));
+  stringstream in(build_string({"void my_fun() {",
+                                "  dict string string kv1 = new dict{string, string}",
+                                "  dict string int kv2 = new dict{string, int}",
+                                "  dict string bool kv3 = new dict{string, bool}",
+                                "  dict string char kv4 = new dict{string, char}",
+                                "  dict string double kv5 = new dict{string, double}",
+                                "}"}));
   ASTParser(Lexer(in)).parse();
 }
 
 TEST(ParserSyntaxTests, ParseDictAssign)
 {
-  stringstream in(build_string({
-      "void my_fun() {",
-      "  a[\"foo\"] = true",
-      "  a[\"foo\"] = \"bar\"",
-      "  a[\"foo\"] = 3.14",
-      "  a[\"foo\"] = 5",
-      "  a[\"foo\"] = 'a'",
-      "  a[\"foo\"] = null",
-      "}"
-    }));
+  stringstream in(build_string({"void my_fun() {",
+                                "  a[\"foo\"] = true",
+                                "  a[\"foo\"] = \"bar\"",
+                                "  a[\"foo\"] = 3.14",
+                                "  a[\"foo\"] = 5",
+                                "  a[\"foo\"] = 'a'",
+                                "  a[\"foo\"] = null",
+                                "}"}));
   ASTParser(Lexer(in)).parse();
 }
 
 TEST(ParserSyntaxTests, ParseDictValue)
 {
-  stringstream in(build_string({
-      "void my_fun() {",
-      "  int x = a[\"foo\"]",
-      "  string x = a[\"foo\"]",
-      "  bool x = a[\"foo\"]",
-      "  char x = a[\"foo\"]",
-      "  double x = a[\"foo\"]",
-      "}"
-    }));
+  stringstream in(build_string({"void my_fun() {",
+                                "  int x = a[\"foo\"]",
+                                "  string x = a[\"foo\"]",
+                                "  bool x = a[\"foo\"]",
+                                "  char x = a[\"foo\"]",
+                                "  double x = a[\"foo\"]",
+                                "}"}));
   ASTParser(Lexer(in)).parse();
 }
 
@@ -252,42 +234,36 @@ TEST(ParserSyntaxTests, ParseDictValue)
 
 TEST(SemanticCheckerTests, StaticDictCreation)
 {
-  stringstream in(build_string({
-      "void main() {",
-      "  dict string int kvs = new dict{string, int}",
-      "}"
-    }));
+  stringstream in(build_string({"void main() {",
+                                "  dict string int kvs = new dict{string, int}",
+                                "}"}));
   SemanticChecker checker;
   ASTParser(Lexer(in)).parse().accept(checker);
 }
 
 TEST(SemanticCheckerTests, StaticIfDictBoolValue)
 {
-  stringstream in(build_string({
-      "void main() {",
-      "  dict string int kvs = new dict{string, int}",
-      "  if (5 < kvs[\"foo\"]) {}"
-      "}"
-    }));
+  stringstream in(build_string({"void main() {",
+                                "  dict string int kvs = new dict{string, int}",
+                                "  if (5 < kvs[\"foo\"]) {}"
+                                "}"}));
   SemanticChecker checker;
   ASTParser(Lexer(in)).parse().accept(checker);
 }
 
 TEST(SemanticCheckerTests, StaticLoopDictBuiltIns)
 {
-  stringstream in(build_string({
-      "void main() {",
-      "  dict string int kvs = new dict{string, int}",
-      "  kvs[\"foo\"] = 5",
-      "  kvs[\"bar\"] = 4",
-      "  for(int i = 0; i < len(keys(kvs)); i = i + 1) {",
-      "     print(keys(kvs)[i])",
-      "  }",
-      "  for(int i = 0; i < len(values(kvs)); i = i + 1) {"
-      "     print(values(kvs)[i])",
-      "  }",
-      "}"
-    }));
+  stringstream in(build_string({"void main() {",
+                                "  dict string int kvs = new dict{string, int}",
+                                "  kvs[\"foo\"] = 5",
+                                "  kvs[\"bar\"] = 4",
+                                "  for(int i = 0; i < len(keys(kvs)); i = i + 1) {",
+                                "     print(keys(kvs)[i])",
+                                "  }",
+                                "  for(int i = 0; i < len(values(kvs)); i = i + 1) {"
+                                "     print(values(kvs)[i])",
+                                "  }",
+                                "}"}));
   SemanticChecker checker;
   ASTParser(Lexer(in)).parse().accept(checker);
 }
@@ -365,13 +341,12 @@ TEST(VMTests, DictValuesIndexing)
 // Code Gen Tests
 //----------------------------------------------------------------------
 
-TEST(CodeGenTests, DictCreation) {
-  stringstream in(build_string({
-    "void main() {",
-    "  dict int string kvs = new dict{int, string}",
-    "  print(kvs)",
-    "}"
-  }));
+TEST(CodeGenTests, DictCreation)
+{
+  stringstream in(build_string({"void main() {",
+                                "  dict int string kvs = new dict{int, string}",
+                                "  print(kvs)",
+                                "}"}));
   VM vm;
   CodeGenerator generator(vm);
   ASTParser(Lexer(in)).parse().accept(generator);
@@ -384,13 +359,11 @@ TEST(CodeGenTests, DictCreation) {
 
 TEST(CodeGenTests, DictInsertPair)
 {
-  stringstream in(build_string({
-    "void main() {",
-    "  dict int string kvs = new dict{int, string}",
-    "  kvs[0] = \"first\"",
-    "  print(kvs[0])",
-    "}"
-  }));
+  stringstream in(build_string({"void main() {",
+                                "  dict int string kvs = new dict{int, string}",
+                                "  kvs[0] = \"first\"",
+                                "  print(kvs[0])",
+                                "}"}));
   VM vm;
   CodeGenerator generator(vm);
   ASTParser(Lexer(in)).parse().accept(generator);
@@ -403,15 +376,13 @@ TEST(CodeGenTests, DictInsertPair)
 
 TEST(CodeGenTests, DictUpdatePair)
 {
-  stringstream in(build_string({
-    "void main() {",
-    "  dict string int kvs = new dict{string, int}",
-    "  kvs[\"first\"] = 42",
-    "  print(kvs[\"first\"])",
-    "  kvs[\"first\"] = 0",
-    "  print(kvs[\"first\"])",
-    "}"
-  }));
+  stringstream in(build_string({"void main() {",
+                                "  dict string int kvs = new dict{string, int}",
+                                "  kvs[\"first\"] = 42",
+                                "  print(kvs[\"first\"])",
+                                "  kvs[\"first\"] = 0",
+                                "  print(kvs[\"first\"])",
+                                "}"}));
   VM vm;
   CodeGenerator generator(vm);
   ASTParser(Lexer(in)).parse().accept(generator);
@@ -420,6 +391,21 @@ TEST(CodeGenTests, DictUpdatePair)
   vm.run();
   EXPECT_EQ("420", out.str());
   restore_cout();
+}
+
+TEST(RuntimeTests, SimpleMainRuns)
+{
+  stringstream in(build_string({"void main() {",
+                                "  int x = 42",
+                                "  x = x + 1",
+                                "}"}));
+  Program p = ASTParser(Lexer(in)).parse();
+  SemanticChecker checker;
+  p.accept(checker);
+  VM vm;
+  CodeGenerator generator(vm);
+  p.accept(generator);
+  EXPECT_NO_THROW(vm.run());
 }
 
 //----------------------------------------------------------------------

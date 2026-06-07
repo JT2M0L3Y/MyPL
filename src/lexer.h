@@ -13,6 +13,7 @@
 #include "mypl_exception.h"
 #include "token.h"
 
+#include <cctype>
 class Lexer
 {
 public:
@@ -36,17 +37,14 @@ private:
 
   // returns single character from input stream, advances stream, and
   // increments column number
-  char read();
+  int read();
 
   // returns single character from input stream without advancing and
   // without incrementing column number
-  char peek();
+  int peek();
 
   // returns true if the given character matches the lexeme provided
-  bool match(char c, char lexeme);
-
-  // create and throw a MyPLException object (exits lexer)
-  void error(const std::string &msg, int line, int column) const;
+  static constexpr bool match(int c, int lexeme) { return c == lexeme; }
 };
 
 #endif

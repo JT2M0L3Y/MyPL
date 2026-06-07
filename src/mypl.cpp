@@ -7,84 +7,97 @@
 
 #include <iostream>
 #include <fstream>
-#include <lexer.h>
-#include <token.h>
-#include <simple_parser.h>
-#include <ast_parser.h>
-#include <print_visitor.h>
-#include <semantic_checker.h>
-#include <vm.h>
-#include <code_generator.h>
+#include <memory>
+#include <vector>
+#include <string_view>
+#include "lexer.h"
+#include "token.h"
+#include "simple_parser.h"
+#include "ast_parser.h"
+#include "print_visitor.h"
+#include "semantic_checker.h"
+#include "vm.h"
+#include "code_generator.h"
 
 using namespace std;
 
-void displayUsage(void);
+void displayUsage();
+
+enum class Mode
+{
+  DEFAULT,
+  LEX,
+  PARSE,
+  PRINT,
+  CHECK,
+  IR,
+  HELP,
+  INVALID
+};
+
+Mode parse_mode(const vector<string> &args)
+{
+  if (args.size() < 2)
+    return Mode::DEFAULT;
+
+  const string_view flag = args[1];
+  if (flag == "--lex")
+    return Mode::LEX;
+  if (flag == "--parse")
+    return Mode::PARSE;
+  if (flag == "--print")
+    return Mode::PRINT;
+  if (flag == "--check")
+    return Mode::CHECK;
+  if (flag == "--ir")
+    return Mode::IR;
+  if (flag == "--help")
+    return Mode::HELP;
+
+  if (args.size() == 2)
+    return Mode::DEFAULT;
+
+  return Mode::INVALID;
+}
 
 int main(int argc, char *argv[])
 {
   try
   {
-    istream *input = &cin;
-    string args[argc];
-    bool lexMode = false;
-    bool parseMode = false;
-    bool printMode = false;
-    bool checkMode = false;
-    bool irMode = false;
+    vector<string> args;
+    args.reserve(argc);
+    for (int i = 0; i < argc; ++i)
+      args.emplace_back(argv[i]);
 
-    // convert argv to string array
-    for (int i = 0; i < argc; i++)
-      args[i] = string(argv[i]);
-
-    // check correct number of args
-    if (argc > 1 && argc < 4)
-    {
-      // check flag mode
-      if (args[1] == "--lex")
-        lexMode = true;
-      else if (args[1] == "--parse")
-        parseMode = true;
-      else if (args[1] == "--print")
-        printMode = true;
-      else if (args[1] == "--check")
-        checkMode = true;
-      else if (args[1] == "--ir")
-        irMode = true;
-    }
-    else
+    Mode mode = parse_mode(args);
+    if (mode == Mode::HELP || mode == Mode::INVALID || argc > 3)
     {
       displayUsage();
       return 1;
     }
 
-    // assign flag status
-    bool flag = lexMode || parseMode || printMode || checkMode || irMode;
+    const string file_arg = [&]()
+    {
+      if (argc == 2 && mode == Mode::DEFAULT)
+        return args[1];
+      if (argc == 3 && mode != Mode::DEFAULT)
+        return args[2];
+      return string();
+    }();
 
-    // incorrect args
-    if ((argc == 3 && !flag) || args[1] == "--help")
+    std::ifstream file_stream;
+    std::istream *input = &cin;
+    if (!file_arg.empty())
     {
-      displayUsage();
-      return 1;
-    }
-
-    // if necessary, modify input stream
-    if ((argc == 3))
-    {
-      input = new ifstream(args[2]);
-      if (input->fail())
-        throw MyPLException("unable to open file: " + args[2]);
-    }
-    else if (argc == 2 && !flag)
-    {
-      input = new ifstream(args[1]);
-      if (input->fail())
-        throw MyPLException("unable to open file: " + args[1]);
+      file_stream.open(file_arg);
+      if (file_stream.fail())
+        throw MyPLException("unable to open file: " + file_arg);
+      input = &file_stream;
     }
 
     Lexer lexer(*input);
 
-    // run correct mode
-    if (lexMode)
+    if (mode == Mode::LEX)
     {
       Token t = lexer.next_token();
       cout << to_string(t) << endl;
@@ -94,31 +107,31 @@ int main(int argc, char *argv[])
         cout << to_string(t) << endl;
       }
     }
-    else if (parseMode)
+    else if (mode == Mode::PARSE)
     {
       SimpleParser parser(lexer);
       parser.parse();
     }
-    else if (printMode)
+    else if (mode == Mode::PRINT)
     {
       ASTParser parser(lexer);
       Program p = parser.parse();
       PrintVisitor printer(cout);
       p.accept(printer);
     }
-    else if (checkMode)
+    else if (mode == Mode::CHECK)
     {
       ASTParser parser(lexer);
       Program p = parser.parse();
       SemanticChecker checker;
       p.accept(checker);
     }
-    else if (irMode)
+    else if (mode == Mode::IR)
     {
       ASTParser parser(lexer);
       Program p = parser.parse();
-      SemanticChecker t;
-      p.accept(t);
+      SemanticChecker checker;
+      p.accept(checker);
       VM vm;
       CodeGenerator g(vm);
       p.accept(g);
@@ -128,21 +141,18 @@ int main(int argc, char *argv[])
     {
       ASTParser parser(lexer);
       Program p = parser.parse();
-      SemanticChecker t;
-      p.accept(t);
+      SemanticChecker checker;
+      p.accept(checker);
       VM vm;
       CodeGenerator g(vm);
       p.accept(g);
       vm.run();
     }
-
-    // free memory if necessary
-    if ((argc == 3) || (argc == 2 && !flag))
-      delete input;
   }
   catch (MyPLException &ex)
   {
     cerr << ex.what() << endl;
+    return 1;
   }
 
   return 0;

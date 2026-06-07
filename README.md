@@ -26,6 +26,11 @@ cmake .
 make
 ```
 
+- Run the static analyzer target if cppcheck is available:
+```
+make cppcheck
+```
+
 <a name="usage"></a>
 ### Usage
 
@@ -40,6 +45,22 @@ Available flags:
 `--print`: pretty printer  
 `--check`: semantic checking  
 `--ir`: machine instruction generation  
+
+### Continuous Integration
+
+This repository includes a GitHub Actions workflow at `.github/workflows/ci.yml` that:
+- configures and builds the project with CMake
+- runs unit tests via `extension_tests`
+- optionally runs `cppcheck`
+- enables `clang-tidy` when available
+
+To run locally:
+```
+mkdir build && cd build
+cmake -DCMAKE_BUILD_TYPE=Debug ..
+cmake --build .
+ctest
+```
 `--help`: usage message  
 
 Features:
