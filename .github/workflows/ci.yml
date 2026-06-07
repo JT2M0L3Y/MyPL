@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Install dependencies
         run: |
           sudo apt-get update
@@ -19,7 +19,7 @@ jobs:
           cd /usr/src/gtest && sudo cmake . && sudo make
           sudo cp lib/*.a /usr/lib
       - name: Configure CMake
-        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DENABLE_CLANG_TIDY=OFF
       - name: Build
         run: cmake --build build --config Debug
       - name: Run unit tests

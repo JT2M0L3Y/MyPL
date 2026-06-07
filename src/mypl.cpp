@@ -8,6 +8,7 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
+#include <string>
 #include <vector>
 #include <string_view>
 #include "lexer.h"

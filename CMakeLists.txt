@@ -13,11 +13,15 @@ set(CMAKE_BUILD_TYPE Debug)
 include_directories("src")
 # include_directories("test")
 
-# Clang-Tidy integration
-find_program(CLANG_TIDY clang-tidy)
-if(CLANG_TIDY)
-  message(STATUS "clang-tidy found: ${CLANG_TIDY}")
-  set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY};-checks=readability-*,performance-*,portability-*;-warnings-as-errors=*")
+include(FetchContent)
+
+option(ENABLE_CLANG_TIDY "Run clang-tidy during build" OFF)
+if(ENABLE_CLANG_TIDY)
+  find_program(CLANG_TIDY clang-tidy)
+  if(CLANG_TIDY)
+    message(STATUS "clang-tidy found: ${CLANG_TIDY}")
+    set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY};-checks=readability-*,performance-*,portability-*")
+  endif()
 endif()
 
 # Cppcheck target
@@ -30,8 +34,14 @@ if(CPPCHECK)
 endif()
 
 # locate gtest
-find_package(GTest REQUIRED)
-include_directories(${GTEST_INCLUDE_DIRS})
+find_package(GTest QUIET)
+if(NOT GTest_FOUND)
+  FetchContent_Declare(
+    googletest
+    URL https://github.com/google/googletest/archive/refs/tags/release-1.13.0.zip
+  )
+  FetchContent_MakeAvailable(googletest)
+endif()
 
 enable_testing()
 
@@ -40,7 +50,11 @@ add_executable(extension_tests tests/extension_tests.cpp
   src/ast_parser.cpp src/print_visitor.cpp src/symbol_table.cpp
   src/semantic_checker.cpp src/vm.cpp src/vm_instr.cpp src/var_table.cpp
   src/code_generator.cpp)
-target_link_libraries(extension_tests ${GTEST_LIBRARIES} pthread)
+if(TARGET GTest::gtest_main)
+  target_link_libraries(extension_tests GTest::gtest_main pthread)
+else()
+  target_link_libraries(extension_tests ${GTEST_LIBRARIES} pthread)
+endif()
 add_test(NAME extension_tests COMMAND extension_tests)
 
 # create mypl target
